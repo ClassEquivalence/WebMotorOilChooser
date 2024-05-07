@@ -1,0 +1,14 @@
+﻿.oilstable {
+    display: grid;
+    grid-template-columns: 20vw 20vw 20vw;
+}
+
+.oilstable div {
+    padding: 1em;
+    align-items: center;
+    text-align: center;
+}
+
+.oilstable div div {
+    text-align: left;
+}
