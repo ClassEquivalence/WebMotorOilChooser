@@ -10,7 +10,7 @@ namespace WebApplication1.Models
         public DbSet<Store> Stores { get; set; }
         public DbSet<MotorOilStats.SAEViscosity> SAEViscosities {get;set;}
         public DbSet<MotorOilStats.APIQualityClass> APIQualityClasses { get;set;}
-        //public DbSet<Users.User> Users { get; set; }
+        public DbSet<Users.User> Users { get; set; }
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
             Database.EnsureCreated();
