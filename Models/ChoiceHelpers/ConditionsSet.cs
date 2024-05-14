@@ -2,7 +2,7 @@
 
 namespace WebApplication1.Models.ChoiceHelpers
 {
-    public class ConditionsSet
+    public class ConditionsSet: BaseEntity
     {
         public List<APIQualityCondition> APIQualityConditions { get; set; }
         public List<OilTypeCondition> OilTypeConditions { get; set; }

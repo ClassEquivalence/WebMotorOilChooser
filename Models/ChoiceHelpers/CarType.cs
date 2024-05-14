@@ -1,6 +1,6 @@
 ﻿namespace WebApplication1.Models.ChoiceHelpers
 {
-    public class CarType
+    public class CarType: BaseEntity
     {
         ConditionsSet conditionsSet {  get; set; }
         public int conditionsSetId {  get; set; }

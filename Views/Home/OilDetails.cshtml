@@ -1,19 +1,40 @@
+@model WebApplication1.Models.ToRender.SpecificOilMerch
 
-    <div class="horizontalCells">
-        <div class="oilPhoto">
-            <img src="!testimg.webp" width="100%">
-        </div>
-        <div class="oilDescription">
+<div class="horizontalCells">
+    <div class="oilPhoto">
+        <img src="@Model.ImgPath" width="100%">
+    </div>
+    <div class="oilDescription">
+        <div>
             <div>
-                <div>
-                    <h3>Цена(за единицу товара, руб.):</h3><h5>333</h5>
-                </div>
-                <div>
-                    <h3>Адрес магазина:</h3><h5>ыыыы</h5>
-                </div>
+                <h3>Название:</h3><h5>@Model.OilName</h5>
+            </div>
+            <div>
+                <h3>Вязкость:</h3><h5>@Model.SAEViscosity</h5>
+            </div>
+            <div>
+                <h3>Объём:</h3><h5>@Model.Volume (литров)</h5>
+            </div>
+            <div>
+                <h3>Производитель:</h3><h5>@Model.Producer</h5>
+            </div>
+            <div>
+                <h3>Класс качества:</h3><h5>@Model.APIClass</h5>
+            </div>
+            <div>
+                <h3>Цена(за единицу товара, руб.):</h3><h5>@Model.Price</h5>
+            </div>
+            <div>
+                <h3>Продавец:</h3><h5>@Model.Company</h5>
+            </div>
+            <div>
+                <h3>Адрес магазина:</h3><h5>@Model.Address</h5>
+            </div>
+            <div>
+                <h3>Остаток:</h3><h5>@Model.StockCount</h5>
             </div>
         </div>
     </div>
     <div class="oilDescriptionBottom">
-
     </div>
+</div>

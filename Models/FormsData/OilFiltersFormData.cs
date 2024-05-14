@@ -27,8 +27,10 @@ namespace WebApplication1.Models.FormsData
             MotorOil oil = merch.MotorOil;
             if(Name!=null)
                 IsSuitable = IsSuitable && oil.Name.StartsWith(Name);
-            if(APIClass!= null)
-                IsSuitable = IsSuitable && oil.APIQualityClass.Name==APIClass;
+            if (APIClass != null && APIClass != "Any")
+            {
+                IsSuitable = IsSuitable && oil.APIQualityClass.id.ToString() == APIClass;
+            }
             if (Producer!=null)
                 IsSuitable = IsSuitable && Producer.Contains(oil.Producer);
             if (SAEViscosity != null)

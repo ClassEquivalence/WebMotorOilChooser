@@ -18,8 +18,6 @@ namespace WebApplication1.Controllers
             _logger = logger;
             db = context;
             OilsAndFilters = new OilsAndFilters();
-            IPasswordHasher passwordHasher = new PasswordHasher();
-            UsersService usersService = new UsersService(passwordHasher, context);
         }
 
         public IActionResult Index()
@@ -69,17 +67,14 @@ namespace WebApplication1.Controllers
             //_logger.LogInformation(FormData.ToString());
             return PartialView(OilsAndFilters);
         }
-        /*
-        [HttpPost]
-        public IActionResult Filters()
+
+        public IActionResult OilDetails(int id)
         {
-            _logger.LogInformation("sent2");
-            foreach (string key in Request.Form.Keys)
-            {
-                _logger.LogInformation(Request.Form[key]);
-            }
-            return new NoContentResult();
+            SpecificOilMerch renderModel = new SpecificOilMerch();
+            if (renderModel.FormData(db, id))
+                return View(renderModel);
+            else
+                return new NotFoundResult();
         }
-        */
     }
 }

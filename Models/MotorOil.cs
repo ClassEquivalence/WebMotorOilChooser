@@ -15,6 +15,6 @@ namespace WebApplication1.Models
         static private string ImgPath = "DataStorage/Images/OilPictures/";
         static private string ImgPrefix = "Img";
         static private string ImgExtension = ".jpeg";
-        public string GetImgNamePath() { return "~/" + ImgPath + ImgPrefix + id + ImgExtension; }
+        public string GetImgNamePath() { return "/" + ImgPath + ImgPrefix + id + ImgExtension; }
     }
 }

@@ -1,35 +1,36 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Спецификация</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Спецификация</title>
     <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
 </head>
 <body>
 
 
     <div class="everything_but_footer">
-<header>
-<div class="header_menu">
-<div><h1>Добро пожаловать в помощник подбора масла!</h1></div>
-</div>
-</header>
-<div class="header_menu_links">
-    <a href="#">Вход/регистрация</a>
-    <a href="#">Подбор по характеристикам</a>
-    <a href="#">Подбор по двигателю</a>
-    <a href="#">Подбор по модели автомобиля</a>
+        <header>
+            <div class="header_menu">
+                <div><h1>Добро пожаловать в помощник подбора масла!</h1></div>
+            </div>
+        </header>
+        <div class="header_menu_links">
+            <a href="#">Вход/регистрация</a>
+            <a href="#">Подбор по характеристикам</a>
+            <a href="#">Подбор по двигателю</a>
+            <a href="#">Подбор по модели автомобиля</a>
+        </div>
+
+        <main>
+            @RenderBody()
+        </main>
     </div>
 
-<main>
-    @RenderBody()
-</main>
-    </div>
-
-<footer>
-<p>&copy; 2023 Мой Интернет Магазин</p>
-</footer>
-    @RenderSection("Scripts", required:false)
+    <footer>
+        <p>&copy; 2023 Мой Интернет Магазин</p>
+    </footer>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
