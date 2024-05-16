@@ -30,7 +30,7 @@ namespace WebApplication1.Models.ToRender
         //Объём - по заданию диапазона
         public List<Company> Companies { get; set; } = null!;
         //Цена-по заданию диапазона
-        public void PrepareData(ApplicationContext db)
+        virtual public void PrepareData(ApplicationContext db)
         {
             List<MotorOil> MotorOils = new List<MotorOil>();
             MotorOilMerches = db.MotorOilMerches.Include(Mome => Mome.Store).ThenInclude(S => S.Company).Include(Mome => Mome.MotorOil).ThenInclude(Moil => Moil.APIQualityClass).
@@ -59,7 +59,7 @@ namespace WebApplication1.Models.ToRender
                     SAEViscosities.Add(oil.SAEViscosity);
             }
         }
-        public void PrepareData(ApplicationContext db, OilFiltersFormData filters)
+        virtual public void PrepareData(ApplicationContext db, OilFiltersFormData filters)
         {
             PrepareData(db);
             List<MotorOilMerch> newList = new List<MotorOilMerch>();
