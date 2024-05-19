@@ -13,6 +13,18 @@
     <None Remove="DataStorage\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\js\home\OilChooseCar.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\home\OilChooseCar.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\home\OilChooseCar.js" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />

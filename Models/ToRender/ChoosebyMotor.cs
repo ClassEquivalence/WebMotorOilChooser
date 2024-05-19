@@ -10,13 +10,13 @@ namespace WebApplication1.Models.ToRender
         public override void PrepareData(ApplicationContext db)
         {
             base.PrepareData(db);
-            MotorsList = db.MotorTypes.Include(cs => cs.conditionsSet).ThenInclude(cond => cond.APIQualityConditions)
+            MotorsList = db.MotorTypes.Include(cs => cs.conditionsSet).ThenInclude(cond => cond.APIQualityConditions).ThenInclude(apiq => apiq.MinAPIQualityClass)
                 .Include(cs => cs.conditionsSet).ThenInclude(cond => cond.SAEViscosityConditions)
-                .Include(cs => cs.conditionsSet).ThenInclude(cond => cond.OilTypeConditions).ToList();
+                .Include(cs => cs.conditionsSet).ThenInclude(cond => cond.OilTypeConditions).ThenInclude(mo => mo.MotorOil).ToList();
         }
         public void PrepareData(ApplicationContext db, OilFiltersFormData filters, string motorName)
         {
-            base.PrepareData(db, filters);
+            PrepareData(db);
             MotorType? motor = null;
             foreach(MotorType m in MotorsList)
             {
@@ -27,7 +27,11 @@ namespace WebApplication1.Models.ToRender
                 }
             }
             if (motor == null)
-                throw new Exception("Motor not found(tried finding it by Name)");
+            {
+                base.PrepareData(db, filters);
+                return;
+            }
+                //throw new Exception("Motor not found(tried finding it by Name)");
 
 
             List<MotorOilMerch> newList = new List<MotorOilMerch>();

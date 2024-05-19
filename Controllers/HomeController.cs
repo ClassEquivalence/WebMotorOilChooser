@@ -4,6 +4,7 @@ using System.Diagnostics;
 using WebApplication1.Models;
 using WebApplication1.Models.ToRender;
 using WebApplication1.Services;
+using WebApplication1.TestUtils;
 
 namespace WebApplication1.Controllers
 {
@@ -67,9 +68,22 @@ namespace WebApplication1.Controllers
                 _logger.LogInformation("Key: "+ key + " Type: " + Request.Form[key].GetType() + " Content: " + Request.Form[key]);
             }
             */
-            OilsAndFilters.PrepareData(db, FormData);
-            //_logger.LogInformation(FormData.ToString());
-            return PartialView(OilsAndFilters);
+            if(Request.Form.Keys.Contains("Car"))
+            {
+                choosebyCar.PrepareData(db, FormData, Request.Form["Car"]);
+                return PartialView(choosebyCar);
+            }
+            else if (Request.Form.Keys.Contains("Motor"))
+            {
+                choosebyMotor.PrepareData(db, FormData, Request.Form["Motor"]);
+                return PartialView(choosebyMotor);
+            }
+            else
+            {
+                OilsAndFilters.PrepareData(db, FormData);
+                //_logger.LogInformation(FormData.ToString());
+                return PartialView(OilsAndFilters);
+            }
         }
 
         public IActionResult OilDetails(int id)
@@ -91,6 +105,7 @@ namespace WebApplication1.Controllers
             choosebyCar.PrepareData(db);
             return View(choosebyCar);
         }
+        /*
 
         [HttpPost]
         public IActionResult Filters(Models.FormsData.OilFiltersFormData FormData, string Motor)
@@ -103,6 +118,14 @@ namespace WebApplication1.Controllers
         {
             choosebyCar.PrepareData(db, FormData, Car);
             return PartialView(choosebyCar);
+        }
+        */
+        public IActionResult initSomeTestDb()
+        {
+            TestDBMaker tdb = new TestDBMaker();
+            tdb.db = db;
+            tdb.initTestDb();
+            return new NoContentResult();
         }
     }
 }

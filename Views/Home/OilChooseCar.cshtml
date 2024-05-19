@@ -4,17 +4,19 @@
 @using WebApplication1.Models.ChoiceHelpers;
 
 
+@section Scripts {
+    <script>let fpath = "@Url.Action("Filters", "Home")"</script>
+    <script src="~/js/Home/OilChooseCar.js" asp-append-version="true"></script>
+}
+
 <div class="motordiv">
-    <h3>Выберите мотор:</h3>
-    <input list="motorchoose" name="Motor" form="FiltersForm">
+    <h3>Выберите модель автомобиля:</h3>
+    <input list="motorchoose" name="Car" form="FiltersForm" class = "filterinput">
     <datalist id="motorchoose">
         @foreach (CarType item in Model.CarList)
         {
             <option id="motoropt @item.id" value="@item.Name"></option>
         }
-        <option value="Чебурашка"></option>
-        <option value="Крокодил Гена"></option>
-        <option value="Шапокляк"></option>
     </datalist>
 </div>
 <table>
@@ -101,7 +103,6 @@
                             <p>От:<input class="filterinput" type="number" name="PriceFrom"></p>
                             <p>До:<input class="filterinput" type="number" name="PriceTo"></p>
                         </div>
-                        <button type="submit">отправить</button>
                     </form>
                 </div>
             </aside>

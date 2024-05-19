@@ -10,17 +10,6 @@
         public bool isAllowing { get; set; }
 
         public abstract bool OilSuitsCondition(MotorOil oil);
-        public bool isOilAcceptable(MotorOil oil)
-        {
-            bool oilSuits = OilSuitsCondition(oil);
-            //Allowing: suits-true, !suits-false, !Allowing: suits-false, !suits-true
-            if (oilSuits && isAllowing)
-                return true;
-            else if (!oilSuits && !isAllowing)
-                return true;
-            else
-                return false;
-        }
 
         public int CompareTo(object? other)
         {
