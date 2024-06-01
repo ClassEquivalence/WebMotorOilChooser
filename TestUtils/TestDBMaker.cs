@@ -93,8 +93,8 @@ namespace WebApplication1.TestUtils
             cars.Add(makeCar("ВАЗ Largus 2014", condSets[16]));
 
             //ВАЗ гранта 2014
-            SAEConds.Add(makeSAECond(10, 15, 50, 50, 1, true));
-            SAEConds.Add(makeSAECond(15, 15, 40, 40, 2, true));
+            SAEConds.Add(makeSAECond(5, 10, 40, 40, 1, true));
+            SAEConds.Add(makeSAECond(0, 10, 30, 30, 2, true));
             APIConds.Add(makeAPICond(APIclasses[6], 3, true));
 
             SAEConds[0].ConditionsSet = condSets[0];
@@ -102,15 +102,15 @@ namespace WebApplication1.TestUtils
             APIConds[0].ConditionsSet = condSets[0];
 
             //хёндай солярис 2015
-            SAEConds.Add(makeSAECond(5, 10, 50, 50, 1, true));
+            SAEConds.Add(makeSAECond(0, 5, 40, 40, 1, true));
             APIConds.Add(makeAPICond(APIclasses[9], 2, true));
 
             SAEConds[2].ConditionsSet = condSets[1];
             APIConds[1].ConditionsSet = condSets[1];
 
             //хёндай солярис 2016
-            SAEConds.Add(makeSAECond(5, 5, 50, 50, 1, true));
-            SAEConds.Add(makeSAECond(10, 10, 60, 60, 2, true));
+            SAEConds.Add(makeSAECond(0, 0, 40, 40, 1, true));
+            SAEConds.Add(makeSAECond(5, 5, 50, 50, 2, true));
             APIConds.Add(makeAPICond(APIclasses[9], 3, true));
 
             SAEConds[3].ConditionsSet = condSets[2];
@@ -118,8 +118,8 @@ namespace WebApplication1.TestUtils
             APIConds[2].ConditionsSet = condSets[2];
 
             //киа рио 3 2014
-            SAEConds.Add(makeSAECond(10, 15, 50, 50, 1, true));
-            SAEConds.Add(makeSAECond(15, 15, 40, 40, 2, true));
+            SAEConds.Add(makeSAECond(5, 10, 40, 40, 1, true));
+            SAEConds.Add(makeSAECond(10, 10, 30, 30, 2, true));
             APIConds.Add(makeAPICond(APIclasses[9], 3, true));
 
             SAEConds[5].ConditionsSet = condSets[3];
@@ -127,15 +127,15 @@ namespace WebApplication1.TestUtils
             APIConds[3].ConditionsSet = condSets[3];
 
             //киа рио 3 2015
-            SAEConds.Add(makeSAECond(5, 10, 50, 50, 1, true));
+            SAEConds.Add(makeSAECond(0, 5, 40, 40, 1, true));
             APIConds.Add(makeAPICond(APIclasses[9], 2, true));
 
             SAEConds[7].ConditionsSet = condSets[4];
             APIConds[4].ConditionsSet = condSets[4];
 
             //киа рио 3 2016
-            SAEConds.Add(makeSAECond(5, 5, 50, 50, 1, true));
-            SAEConds.Add(makeSAECond(10, 10, 60, 60, 2, true));
+            SAEConds.Add(makeSAECond(0, 0, 40, 40, 1, true));
+            SAEConds.Add(makeSAECond(5, 5, 50, 50, 2, true));
             APIConds.Add(makeAPICond(APIclasses[9], 3, true));
 
             SAEConds[8].ConditionsSet = condSets[5];
@@ -143,8 +143,8 @@ namespace WebApplication1.TestUtils
             APIConds[5].ConditionsSet = condSets[5];
 
             //ваз калина 2 2014
-            SAEConds.Add(makeSAECond(10, 15, 50, 50, 1, true));
-            SAEConds.Add(makeSAECond(15, 15, 40, 40, 2, true));
+            SAEConds.Add(makeSAECond(5, 10, 40, 40, 1, true));
+            SAEConds.Add(makeSAECond(10, 10, 30, 30, 2, true));
             APIConds.Add(makeAPICond(APIclasses[6], 3, true));
 
             SAEConds[10].ConditionsSet = condSets[6];
@@ -152,8 +152,8 @@ namespace WebApplication1.TestUtils
             APIConds[6].ConditionsSet = condSets[6];
 
             //фольксваген поло 2 2014
-            SAEConds.Add(makeSAECond(10, 10, 50, 50, 1, true));
-            SAEConds.Add(makeSAECond(15, 15, 40, 50, 2, true));
+            SAEConds.Add(makeSAECond(5, 5, 40, 40, 1, true));
+            SAEConds.Add(makeSAECond(10, 10, 30, 40, 2, true));
             APIConds.Add(makeAPICond(APIclasses[9], 3, true));
 
             SAEConds[12].ConditionsSet = condSets[7];
@@ -161,15 +161,15 @@ namespace WebApplication1.TestUtils
             APIConds[7].ConditionsSet = condSets[7];
 
             //фольксваген поло 2 2015
-            SAEConds.Add(makeSAECond(5, 10, 50, 50, 1, true));
+            SAEConds.Add(makeSAECond(0, 5, 40, 40, 1, true));
             APIConds.Add(makeAPICond(APIclasses[9], 2, true));
 
             SAEConds[14].ConditionsSet = condSets[8];
             APIConds[8].ConditionsSet = condSets[8];
 
             //фольксваген поло 2 2016
-            SAEConds.Add(makeSAECond(5, 5, 50, 50, 1, true));
-            SAEConds.Add(makeSAECond(10, 10, 60, 60, 2, true));
+            SAEConds.Add(makeSAECond(0, 0, 40, 40, 1, true));
+            SAEConds.Add(makeSAECond(5, 5, 50, 50, 2, true));
             APIConds.Add(makeAPICond(APIclasses[9], 3, true));
 
             SAEConds[15].ConditionsSet = condSets[9];
@@ -177,22 +177,22 @@ namespace WebApplication1.TestUtils
             APIConds[9].ConditionsSet = condSets[9];
 
             //рено логан 2 2014
-            SAEConds.Add(makeSAECond(10, 15, 50, 50, 1, true));
+            SAEConds.Add(makeSAECond(5, 10, 40, 40, 1, true));
             APIConds.Add(makeAPICond(APIclasses[9], 2, true));
 
             SAEConds[17].ConditionsSet = condSets[10];
             APIConds[10].ConditionsSet = condSets[10];
 
             //рено логан 2 2015
-            SAEConds.Add(makeSAECond(10, 10, 50, 50, 1, true));
+            SAEConds.Add(makeSAECond(5, 5, 40, 40, 1, true));
             APIConds.Add(makeAPICond(APIclasses[9], 2, true));
 
             SAEConds[18].ConditionsSet = condSets[11];
             APIConds[11].ConditionsSet = condSets[11];
 
             //рено логан 2 2016
-            SAEConds.Add(makeSAECond(5, 5, 50, 50, 1, true));
-            SAEConds.Add(makeSAECond(10, 10, 60, 60, 2, true));
+            SAEConds.Add(makeSAECond(0, 0, 40, 40, 1, true));
+            SAEConds.Add(makeSAECond(5, 5, 50, 50, 2, true));
             APIConds.Add(makeAPICond(APIclasses[9], 3, true));
 
             SAEConds[19].ConditionsSet = condSets[12];
@@ -200,22 +200,22 @@ namespace WebApplication1.TestUtils
             APIConds[12].ConditionsSet = condSets[12];
 
             //рено дастер 2014
-            SAEConds.Add(makeSAECond(10, 15, 50, 50, 1, true));
+            SAEConds.Add(makeSAECond(5, 10, 40, 40, 1, true));
             APIConds.Add(makeAPICond(APIclasses[9], 2, true));
 
             SAEConds[21].ConditionsSet = condSets[13];
             APIConds[13].ConditionsSet = condSets[13];
 
             //рено дастер 2015
-            SAEConds.Add(makeSAECond(10, 10, 50, 50, 1, true));
+            SAEConds.Add(makeSAECond(5, 5, 40, 40, 1, true));
             APIConds.Add(makeAPICond(APIclasses[9], 2, true));
 
             SAEConds[22].ConditionsSet = condSets[14];
             APIConds[14].ConditionsSet = condSets[14];
 
             //рено дастер 2016
-            SAEConds.Add(makeSAECond(5, 5, 50, 50, 1, true));
-            SAEConds.Add(makeSAECond(10, 10, 60, 60, 2, true));
+            SAEConds.Add(makeSAECond(0, 0, 40, 40, 1, true));
+            SAEConds.Add(makeSAECond(5, 5, 50, 50, 2, true));
             APIConds.Add(makeAPICond(APIclasses[9], 3, true));
 
             SAEConds[23].ConditionsSet = condSets[15];
@@ -223,8 +223,8 @@ namespace WebApplication1.TestUtils
             APIConds[15].ConditionsSet = condSets[15];
 
             //ваз ларгус 2014
-            SAEConds.Add(makeSAECond(10, 15, 50, 50, 1, true));
-            SAEConds.Add(makeSAECond(15, 15, 40, 40, 2, true));
+            SAEConds.Add(makeSAECond(5, 10, 40, 40, 1, true));
+            SAEConds.Add(makeSAECond(10, 10, 30, 30, 2, true));
             APIConds.Add(makeAPICond(APIclasses[6], 3, true));
 
             SAEConds[25].ConditionsSet = condSets[16];

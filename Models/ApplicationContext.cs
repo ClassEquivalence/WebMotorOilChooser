@@ -15,7 +15,6 @@ namespace WebApplication1.Models
         public DbSet<CarType> CarTypes { get; set; }
         public DbSet<ConditionsSet> ConditionsSets { get; set; }
         public DbSet<MotorType> MotorTypes { get; set; }
-
         public DbSet<APIQualityCondition> APIQualityConditions { get; set; }
         public DbSet<OilTypeCondition> OilTypeConditions { get; set; }
         public DbSet<SAEViscosityCondition> SAEViscosityConditions { get; set; }

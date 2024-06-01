@@ -1,0 +1,49 @@
+﻿@model MerchList;
+@using WebApplication1.Models.Edit.ToRender;
+
+@section Styles {
+    <link rel="stylesheet" href="/css/Home/_Layout.css" />
+    <link rel="stylesheet" href="/css/Home/Test.css" />
+}
+
+<div>
+    <h3>Список масел на продажу</h3>
+    @foreach(var el in Model.MotorOilMerches)
+    {
+        <h4>Масло(номенклатура) товара</h4>
+        <div>
+            <select id="oilchoose @el.id" name="oilchoose @el.id">
+                @foreach (var item in Model.MotorOils)
+                {
+                    if (el.MotorOilId == item.id)
+                    {
+                        <option selected value="@item.id">@item.Name @item.SAEViscosity.ToString() @item.Volume (л)</option>
+                    }
+                    else{
+                        <option value="@item.id">@item.Name @item.SAEViscosity.ToString()</option>
+                    }
+                }
+            </select>
+        </div>
+        <h4>Точка продажи</h4>
+        <div>
+            <select id="storechoose @el.id" name="storechoose @el.id">
+                @foreach (var item in Model.Stores)
+                {
+                    if (el.StoreId == item.id)
+                    {
+                        <option selected value="@item.id">@item.Adress (@item.Company.Name)</option>
+                    }
+                    else
+                    {
+                        <option value="@item.id">@item.Adress (@item.Company.Name)</option>
+                    }
+                }
+            </select>
+        </div>
+        <h4>Цена:</h4>
+        <div>
+            <input type="number" name="price @el.id" value="@el.Price">
+        </div>
+    }
+</div>

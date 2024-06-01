@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: auto;
+}
+
+header {
+    background-color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    padding-left: clamp(0px, 10vw, 10vw);
+	padding-right: clamp(0px, 10vw, 10vw);
+}
+
+.product {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.header_menu{
+	text-align: center;
+	min-width: 80vw;
+	margin:auto;
+    padding: 1em;
+}
+
+.header_menu_links{	
+    background-color: #ffffff;
+    text-align: center;
+    padding-left: clamp(0px, 10vw, 10vw);
+	padding-right: clamp(0px, 10vw, 10vw);
+    box-shadow: 0 15px 20px #ffe292;
+    min-height: 50px;
+    top:0px;
+    position: sticky;
+	display: flex;
+    justify-content: space-between;
+}
+
+.header_menu a{
+	margin: auto;
+}
+
+main{
+    margin-top: 10px;
+    padding-left: clamp(0px, 10vw, 10vw);
+	padding-right: clamp(0px, 10vw, 10vw);
+}
+
+.everything_but_footer{
+    min-height: 90vh;
+}
+
+footer {
+    background-color: #e2e2e2;
+    bottom: 0px;
+    min-height:10vh;
+}
+
+.maincontent{
+    width:60vw;
+}
+
+aside{
+    width:20vw;
+    height:inherit;
+    background-color: #f0f0f0;
+}
+
+.oilstable{
+    display: grid;
+    grid-template-columns: 20vw 20vw 20vw;
+}
+
+.oilstable div{
+    padding: 1em;
+    align-items: center;
+    text-align: center;
+}
+
+.oilstable div div{
+    text-align: left;
+}
+
+#img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: grab;
+}
+
+#imgEditContainer {
+    position: relative;
+    width: 200px;
+    height: 320px;
+    overflow: hidden;
+    border: 1px solid black;
+}

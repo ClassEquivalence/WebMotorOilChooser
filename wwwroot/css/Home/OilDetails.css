@@ -1,0 +1,28 @@
+
+.oilPhoto{
+    width: 30vw;
+    padding:10px;
+}
+
+.oilDescription{
+    position: relative;
+    width: 50vw;
+    padding: 5px;
+
+}
+
+.horizontalCells{
+    display: flex;
+    position: relative;
+}
+
+.oilDescription div{
+    position: absolute;
+    bottom:0px;
+    width:inherit;
+}
+
+.oilDescription div div{
+    position:relative;
+    display: flex;
+}

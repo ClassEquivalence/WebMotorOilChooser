@@ -1,0 +1,63 @@
+@using WebApplication1.Models.Edit.ToRender;
+@model WebApplication1.Models.Edit.ToRender.EditOil;
+@section Styles {
+    <link rel="stylesheet" href="/css/Home/_Layout.css" />
+    <link rel="stylesheet" href="/css/Home/Test.css" />
+}
+
+@section Scripts{
+
+    <script>
+        let editOilState = @Model.editOilState;
+        if (editOilState) {
+            var editOilImgSrc = "@Model.imgPath";
+        }
+    </script>
+    <script src="/js/Edit/addoil.js"></script>
+}
+
+<div>
+    <form id="oilForm" method="post" action="#">
+        <div>
+            <h4>Название масла</h4>
+            <input type="text" name="OilName" value="@Model.OilName" required/>
+        </div>
+        <div>
+            <h4>Производитель</h4>
+            <input type="text" name="Producer" value="@Model.Producer" required/>
+        </div>
+        <div>
+            <h4>Класс качества</h4>
+            @foreach(var el in Model.QualityClasses)
+            {
+                if (el.id == Model.QualityClass.id)
+                {
+                    <label for="@el.Name">@el.Name</label>
+                    <input type="radio" name="APIQualityClass" value="@el.Name" checked/>
+                }
+                else
+                {
+                    <label for="@el.Name">@el.Name</label>
+                    <input type="radio" name="APIQualityClass" value="@el.Name" />
+                }
+            }
+        </div>
+        <div>
+            <h4>Объём канистры(для указания масла на розлив укажите 0 объём)</h4>
+            <input type="number" name="Volume" value="@Model.Volume" required/>
+        </div>
+        <div>
+            <h4>Изображение</h4>
+            <div id="imgEditContainer" hidden>
+                <img src="" id="img" draggable="false" style="top: 0px; left: 0px;"/>
+            </div>
+            <input type="number" id="imgScale" value="10" min="2" max="100" hidden/>
+            <input id="oilImgInput" type="file" name="Image"/>
+        </div>
+        <input type="button" value="Сохранить" id="sendData"/>
+        <input type="number" id="imgx" value="" name="imgx" hidden/>
+        <input type="number" id="imgy" value="" name="imgy" hidden />
+        <input id="imgscale" value="" name="imgscale" hidden />
+        <input type="number" id="oilId" value="" name="oilId" hidden />
+    </form>
+</div>

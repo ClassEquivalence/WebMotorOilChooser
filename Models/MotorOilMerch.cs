@@ -2,6 +2,8 @@
 {
     public class MotorOilMerch : BaseEntity
     {
+        //merch done, oils done, apis done, companies done, cars done
+        //motors done, conds
         public MotorOil? MotorOil { get; set; }
         public int MotorOilId { get; set; }
         public Store? Store { get; set; }

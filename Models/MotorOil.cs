@@ -1,4 +1,5 @@
 ﻿using WebApplication1.Models.MotorOilStats;
+using System.Drawing;
 
 namespace WebApplication1.Models
 {
@@ -16,5 +17,14 @@ namespace WebApplication1.Models
         static private string ImgPrefix = "Img";
         static private string ImgExtension = ".jpeg";
         public string GetImgNamePath() { return "/" + ImgPath + ImgPrefix + id + ImgExtension; }
+        void SaveStandartizedImg(Bitmap bmp)
+        {
+            bmp.Save(GetImgNamePath());
+            bmp.Dispose();
+        }
+        public async void AsyncSaveImg(Bitmap bmp)
+        {
+            await Task.Run(()=>SaveStandartizedImg(bmp));
+        }
     }
 }
