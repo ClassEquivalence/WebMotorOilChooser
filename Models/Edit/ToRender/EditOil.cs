@@ -37,8 +37,25 @@ namespace WebApplication1.Models.Edit.ToRender
         public string? Producer {  get; set; }
         public APIQualityClass QualityClass { get; set; }
         public List<APIQualityClass> QualityClasses { get; set; }
+        public SAEViscosity SAEViscosity {  get; set; }
         public decimal Volume { get; set; }
         public string imgPath { get; set; }
         public string editOilState { get; set; }
+
+        public EditOil(ApplicationContext db, MotorOil oil, bool isEdit)
+        {
+            OilName = oil.Name;
+            Producer = oil.Producer;
+            QualityClass = oil.APIQualityClass;
+            QualityClasses = db.APIQualityClasses.ToList();
+            Volume = oil.Volume;
+            imgPath = oil.GetImgNamePath();
+            if (isEdit)
+            {
+                editOilState = "true";
+            }
+            else
+            { editOilState = "false"; }
+        }
     }
 }

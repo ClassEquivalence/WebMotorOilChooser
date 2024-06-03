@@ -36,7 +36,6 @@
   <ItemGroup>
     <Folder Include="wwwroot\css\Home\" />
     <Folder Include="wwwroot\css\Edit\" />
-    <Folder Include="wwwroot\js\Edit\" />
   </ItemGroup>
 
 </Project>

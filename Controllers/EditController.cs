@@ -25,15 +25,13 @@ namespace WebApplication1.Controllers
             if (id != -1)
             {
                 var oil = db.MotorOils.Include(qc => qc.APIQualityClass).Where(mo => mo.id == id).ToList()[0];
-                var dto = OilToEditOil(oil);
-                dto.editOilState = "true";
+                var dto = new EditOil(db, oil, true);
                 return View(dto);
             }
             else
             {
                 MotorOil oil = new();
-                var dto = OilToEditOil(oil);
-                dto.editOilState = "false";
+                var dto = new EditOil(db, oil, false);
                 return View(dto);
             }
         }
@@ -68,19 +66,6 @@ namespace WebApplication1.Controllers
         public IActionResult ConditionList()
         {
             return View();
-        }
-
-        protected EditOil OilToEditOil(MotorOil oil)
-        {
-            EditOil eo = new EditOil();
-            eo.imgPath = oil.GetImgNamePath();
-            eo.OilName = oil.Name;
-            eo.Producer = oil.Producer;
-            eo.QualityClass = oil.APIQualityClass;
-            eo.QualityClasses = db.APIQualityClasses.ToList();
-            eo.Volume = oil.Volume;
-            eo.editOilState = "true";
-            return eo;
         }
     }
 }

@@ -3,6 +3,10 @@
 @section Styles {
     <link rel="stylesheet" href="/css/Home/_Layout.css" />
     <link rel="stylesheet" href="/css/Home/Test.css" />
+
+    <link rel="stylesheet" href="/css/Edit/addoil.css" />
+
+    <link rel="stylesheet" href="/css/Edit/Croppie/croppie.css">
 }
 
 @section Scripts{
@@ -13,7 +17,9 @@
             var editOilImgSrc = "@Model.imgPath";
         }
     </script>
-    <script src="/js/Edit/addoil.js"></script>
+    
+    <script src="/js/Edit/Croppie/croppie.js"></script>
+    <script src="/js/Edit/addoil2.js"></script>
 }
 
 <div>
@@ -49,15 +55,10 @@
         <div>
             <h4>Изображение</h4>
             <div id="imgEditContainer" hidden>
-                <img src="" id="img" draggable="false" style="top: 0px; left: 0px;"/>
             </div>
-            <input type="number" id="imgScale" value="10" min="2" max="100" hidden/>
             <input id="oilImgInput" type="file" name="Image"/>
         </div>
         <input type="button" value="Сохранить" id="sendData"/>
-        <input type="number" id="imgx" value="" name="imgx" hidden/>
-        <input type="number" id="imgy" value="" name="imgy" hidden />
-        <input id="imgscale" value="" name="imgscale" hidden />
         <input type="number" id="oilId" value="" name="oilId" hidden />
     </form>
 </div>

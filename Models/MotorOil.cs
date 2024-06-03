@@ -26,5 +26,10 @@ namespace WebApplication1.Models
         {
             await Task.Run(()=>SaveStandartizedImg(bmp));
         }
+        public MotorOil()
+        {
+            APIQualityClass = new();
+            SAEViscosity = new();
+        }
     }
 }
