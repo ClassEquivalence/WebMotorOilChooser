@@ -9,6 +9,7 @@ document.getElementById('oilImgInput').oninput = ()=>{
     let image = document.getElementById("oilImgInput");
     //let img = new Image();
     //img.src = URL.createObjectURL(image.files.item(0));
+    document.getElementById("imgEditContainer").hidden = false;
 
     vanilla.bind({
     url: URL.createObjectURL(image.files.item(0))
@@ -19,14 +20,14 @@ document.getElementById('oilImgInput').oninput = ()=>{
 
 //on button click
 document.getElementById('sendData').onclick = () => {
-    vanilla.result('blob').then(function (blob) {
+    vanilla.result('blob', 'viewport', 'jpeg').then(function (blob) {
         // do something with cropped blob
         let f2 = new File([blob], "File.jpeg");
         let fl = new DataTransfer();
         fl.items.add(f2);
         document.getElementById("oilImgInput").files = fl.files;
+        document.getElementById("oilForm").submit();
     });
-
 }
 
 if (editOilState) {

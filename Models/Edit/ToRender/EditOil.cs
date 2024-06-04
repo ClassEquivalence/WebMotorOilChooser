@@ -32,7 +32,7 @@ namespace WebApplication1.Models.Edit.ToRender
             <input id="oilImgInput" type="file" name="Image">
         </div>
          */
-
+        public int id { get; set; }
         public string? OilName { get; set; }
         public string? Producer {  get; set; }
         public APIQualityClass QualityClass { get; set; }
@@ -44,10 +44,12 @@ namespace WebApplication1.Models.Edit.ToRender
 
         public EditOil(ApplicationContext db, MotorOil oil, bool isEdit)
         {
+            id = oil.id;
             OilName = oil.Name;
             Producer = oil.Producer;
             QualityClass = oil.APIQualityClass;
             QualityClasses = db.APIQualityClasses.ToList();
+            SAEViscosity = oil.SAEViscosity;
             Volume = oil.Volume;
             imgPath = oil.GetImgNamePath();
             if (isEdit)
@@ -55,7 +57,7 @@ namespace WebApplication1.Models.Edit.ToRender
                 editOilState = "true";
             }
             else
-            { editOilState = "false"; }
+            { editOilState = "false"; id = -1; }
         }
     }
 }

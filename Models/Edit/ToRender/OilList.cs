@@ -8,7 +8,7 @@ namespace WebApplication1.Models.Edit.ToRender
         public List<MotorOil> MotorOils { get; set;}
         public OilList(ApplicationContext db)
         {
-            MotorOils = db.MotorOils.Include(s=>s.SAEViscosity).ToList();
+            MotorOils = db.MotorOils.Include(s=>s.SAEViscosity).Include(api=>api.APIQualityClass).ToList();
         }
     }
 }

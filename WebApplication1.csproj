@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Edit\OilList.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\js\home\OilChooseCar.js" />
   </ItemGroup>
 
@@ -36,6 +37,11 @@
   <ItemGroup>
     <Folder Include="wwwroot\css\Home\" />
     <Folder Include="wwwroot\css\Edit\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Edit\OilList.cshtml" />
   </ItemGroup>
 
 </Project>

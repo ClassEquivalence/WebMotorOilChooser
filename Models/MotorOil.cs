@@ -16,20 +16,25 @@ namespace WebApplication1.Models
         static private string ImgPath = "DataStorage/Images/OilPictures/";
         static private string ImgPrefix = "Img";
         static private string ImgExtension = ".jpeg";
+        static private string wwwrootpath = "C:/Visual Studio/WebApplication1/wwwroot";
         public string GetImgNamePath() { return "/" + ImgPath + ImgPrefix + id + ImgExtension; }
-        void SaveStandartizedImg(Bitmap bmp)
+        public void SaveImg(IFormFile ImgFile)
         {
-            bmp.Save(GetImgNamePath());
-            bmp.Dispose();
-        }
-        public async void AsyncSaveImg(Bitmap bmp)
-        {
-            await Task.Run(()=>SaveStandartizedImg(bmp));
+            var filestream = System.IO.File.Create(wwwrootpath + GetImgNamePath());
+            ImgFile.CopyTo(filestream);
+            filestream.Flush();
+            filestream.Close();
         }
         public MotorOil()
         {
             APIQualityClass = new();
             SAEViscosity = new();
+        }
+
+        public override string ToString()
+        {
+            return Name + " " + SAEViscosity?.ToString() + " " + Volume +
+                "(л) " + APIQualityClass?.Name;
         }
     }
 }

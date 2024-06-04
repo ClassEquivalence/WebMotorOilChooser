@@ -23,7 +23,7 @@
 }
 
 <div>
-    <form id="oilForm" method="post" action="#">
+    <form id="oilForm" method="post" asp-controller="Edit" asp-action="EditedAddedOil" enctype="multipart/form-data">
         <div>
             <h4>Название масла</h4>
             <input type="text" name="OilName" value="@Model.OilName" required/>
@@ -38,16 +38,24 @@
             {
                 if (el.id == Model.QualityClass.id)
                 {
-                    <label for="@el.Name">@el.Name</label>
-                    <input type="radio" name="APIQualityClass" value="@el.Name" checked/>
+                    <label >@el.Name</label>
+                    <input type="radio" name="APIClass" value="@el.id" checked/>
                 }
                 else
                 {
-                    <label for="@el.Name">@el.Name</label>
-                    <input type="radio" name="APIQualityClass" value="@el.Name" />
+                    <label >@el.Name</label>
+                    <input type="radio" name="APIClass" value="@el.id" />
                 }
             }
         </div>
+
+        <div>
+            <h4>Вязкость на холодном двигателе:</h4>
+            <input type="number" min="0" name="SAECold" value="@Model.SAEViscosity.OnCold" />
+            <h4>Вязкость на горячем двигателе:</h4>
+            <input type="number" min="0" name="SAEHot" value="@Model.SAEViscosity.OnHot" />
+        </div>
+
         <div>
             <h4>Объём канистры(для указания масла на розлив укажите 0 объём)</h4>
             <input type="number" name="Volume" value="@Model.Volume" required/>
@@ -56,9 +64,9 @@
             <h4>Изображение</h4>
             <div id="imgEditContainer" hidden>
             </div>
-            <input id="oilImgInput" type="file" name="Image"/>
+            <input id="oilImgInput" type="file" name="oilImgInput" />
         </div>
         <input type="button" value="Сохранить" id="sendData"/>
-        <input type="number" id="oilId" value="" name="oilId" hidden />
+        <input type="number" id="oilId" value="@Model.id" name="oilId" hidden />
     </form>
 </div>

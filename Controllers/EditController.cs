@@ -7,6 +7,7 @@ using WebApplication1.Models.Edit.ToRender;
 
 namespace WebApplication1.Controllers
 {
+    [RequestSizeLimit(100 * 1024 * 1024)]
     public class EditController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,13 +19,36 @@ namespace WebApplication1.Controllers
         }
         public IActionResult OilList()
         {
-            return View();
+            var OilList = new OilList(db);
+            return View(OilList);
+        }
+        public IActionResult EditOilList(int? delete, int? edit, int? add)
+        {
+            _logger.LogInformation("LoggerAtReady! ");
+            if (Request.Query.ContainsKey("delete"))
+            {
+                _logger.LogInformation("delete is...");
+                var oil = db.MotorOils.Where(id => id.id == delete).ToList()[0];
+                db.MotorOils.Remove(oil);
+                db.SaveChanges();
+                return RedirectToAction(nameof(OilList));
+            }
+            else if (Request.Query.ContainsKey("edit"))
+            {
+                _logger.LogInformation("Edit is " + edit);
+                return RedirectToAction(nameof(EditOil), new { id = edit });
+            }
+            else
+            {
+                _logger.LogInformation("add is...");
+                return RedirectToAction(nameof(EditOil), new { id = -1 });
+            }
         }
         public IActionResult EditOil(int id)
         {
             if (id != -1)
             {
-                var oil = db.MotorOils.Include(qc => qc.APIQualityClass).Where(mo => mo.id == id).ToList()[0];
+                var oil = db.MotorOils.Include(qc => qc.APIQualityClass).Include(sae=>sae.SAEViscosity).Where(mo => mo.id == id).ToList()[0];
                 var dto = new EditOil(db, oil, true);
                 return View(dto);
             }
@@ -37,9 +61,9 @@ namespace WebApplication1.Controllers
         }
         public IActionResult EditedAddedOil(Models.Edit.ToAccept.MotorOil motorOil)
         {
-            Bitmap bmp = motorOil.NormalizeImg();
+            IFormFile f = motorOil.oilImgInput;
             var mo = motorOil.toMotorOil(db);
-            mo.AsyncSaveImg(bmp);
+            mo.SaveImg(f);
             return View();
         }
         public IActionResult OilMerchList()

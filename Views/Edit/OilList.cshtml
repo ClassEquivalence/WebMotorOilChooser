@@ -1,0 +1,24 @@
+﻿@model OilList;
+@using WebApplication1.Models.Edit.ToRender;
+
+@section Styles {
+    <link rel="stylesheet" href="/css/Home/_Layout.css" />
+    <link rel="stylesheet" href="/css/Home/Test.css" />
+}
+
+<div>
+    <h3>Список</h3>
+    @foreach (var el in Model.MotorOils)
+    {
+        <h4>Масло: </h4><h4>@el</h4>
+        <a href="EditOilList?edit=@el.id">
+            <input type="button" name="add" value="Редактировать" />
+        </a>
+        <a href="EditOilList?delete=@el.id">
+            <input type="button" name="add" value="Удалить" />
+        </a>
+    }
+    <a href="EditOilList/?add=-1">
+        <input type="button" name="add" value="Добавить" />
+    </a>
+</div>

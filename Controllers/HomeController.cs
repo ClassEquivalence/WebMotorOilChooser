@@ -13,7 +13,6 @@ namespace WebApplication1.Controllers
         private readonly ILogger<HomeController> _logger;
         public ApplicationContext db;
         OilsAndFilters OilsAndFilters;
-        ChoosebyMotor choosebyMotor;
         ChoosebyCar choosebyCar;
 
         public HomeController(ILogger<HomeController> logger, ApplicationContext context)
@@ -21,7 +20,6 @@ namespace WebApplication1.Controllers
             _logger = logger;
             db = context;
             OilsAndFilters = new OilsAndFilters();
-            choosebyMotor = new ChoosebyMotor();
             choosebyCar = new ChoosebyCar();
         }
 
@@ -73,11 +71,6 @@ namespace WebApplication1.Controllers
                 choosebyCar.PrepareData(db, FormData, Request.Form["Car"]);
                 return PartialView(choosebyCar);
             }
-            else if (Request.Form.Keys.Contains("Motor"))
-            {
-                choosebyMotor.PrepareData(db, FormData, Request.Form["Motor"]);
-                return PartialView(choosebyMotor);
-            }
             else
             {
                 OilsAndFilters.PrepareData(db, FormData);
@@ -93,12 +86,6 @@ namespace WebApplication1.Controllers
                 return View(renderModel);
             else
                 return new NotFoundResult();
-        }
-
-        public IActionResult OilChooseMotor()
-        {
-            choosebyMotor.PrepareData(db);
-            return View(choosebyMotor);
         }
         public IActionResult OilChooseCar()
         {
