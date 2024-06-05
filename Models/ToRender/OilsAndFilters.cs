@@ -3,7 +3,7 @@ using WebApplication1.Models.FormsData;
 
 namespace WebApplication1.Models.ToRender
 {
-    public class OilsAndFilters
+    public class OilsAndFilters : RenderBase
     {
         /*
          Фильтры:

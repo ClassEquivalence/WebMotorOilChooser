@@ -13,7 +13,6 @@ namespace WebApplication1.Models.ChoiceHelpers
 
         //Это не свойство, поэтому в БД оно не попадёт.
         public List<BaseCondition> BaseConditions;
-        bool listPrepared = false;
         public void PrepareConditionList()
         {
             BaseConditions = new List<BaseCondition>();

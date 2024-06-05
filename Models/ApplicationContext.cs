@@ -19,6 +19,7 @@ namespace WebApplication1.Models
         public DbSet<OilTypeCondition> OilTypeConditions { get; set; }
         public DbSet<SAEViscosityCondition> SAEViscosityConditions { get; set; }
         public DbSet<Users.User> Users { get; set; }
+        public DbSet<Users.Role> Role { get; set; }
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
             Database.EnsureCreated();

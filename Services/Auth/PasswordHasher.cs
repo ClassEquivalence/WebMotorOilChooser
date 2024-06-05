@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography;
+using System.Text;
 
 namespace WebApplication1.Services.Auth
 {
@@ -34,7 +35,7 @@ namespace WebApplication1.Services.Auth
         }
         public string Generate(string password)
         {
-            byte[] passInBytes = Convert.FromBase64String(password);
+            byte[] passInBytes = Encoding.UTF8.GetBytes(password);
             passInBytes = saltSum(passInBytes);
             byte[] hashed = SHA512.HashData(passInBytes);
             return Convert.ToBase64String(hashed);

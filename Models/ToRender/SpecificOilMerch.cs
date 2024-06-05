@@ -3,7 +3,7 @@ using WebApplication1.Models.MotorOilStats;
 
 namespace WebApplication1.Models.ToRender
 {
-    public class SpecificOilMerch
+    public class SpecificOilMerch: RenderBase
     {
         /*Отображаем:
  * Название масла MO integrated

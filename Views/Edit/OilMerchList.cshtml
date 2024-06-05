@@ -1,16 +1,34 @@
 ﻿@model MerchList;
 @using WebApplication1.Models.Edit.ToRender;
+@using WebApplication1.Controllers;
 
 @section Styles {
     <link rel="stylesheet" href="/css/Home/_Layout.css" />
     <link rel="stylesheet" href="/css/Home/Test.css" />
 }
 
-<div>
+@section Scripts{
+    <script>
+        let MerchIds = [
+        @foreach(var el in Model.MotorOilMerches)
+        {
+            <text>@el.id, </text> 
+        }
+        ]
+        let PathCreate = "CreateMerch/";
+        let PathDelete = "DeleteMerch/";
+        let PathPut = "PutMerch/";
+    </script>
+    <script src="/js/Edit/OilMerchList.js"></script>
+}
+
+<div id="merchesGlobalContainer">
     <h3>Список масел на продажу</h3>
     @foreach (var el in Model.MotorOilMerches)
     {
         <form id="@el.id">
+            <input name="merchId" value="@el.id" hidden />
+
             <h4>Масло(номенклатура) товара</h4>
             <div>
                 <select id="oilchoose @el.id" name="oilchoose" class="merchOpts @el.id">
@@ -51,3 +69,4 @@
         </form>
     }
 </div>
+<input type="button" id="addEl" value="Добавить"/>

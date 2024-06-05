@@ -1,8 +1,9 @@
 ﻿using WebApplication1.Models.MotorOilStats;
+using WebApplication1.Models.ToRender;
 
 namespace WebApplication1.Models.Edit.ToRender
 {
-    public class EditOil
+    public class EditOil : RenderBase
     {
         /*
                  <div>

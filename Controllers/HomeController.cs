@@ -4,6 +4,7 @@ using System.Diagnostics;
 using WebApplication1.Models;
 using WebApplication1.Models.ToRender;
 using WebApplication1.Services;
+using WebApplication1.Services.Auth;
 using WebApplication1.TestUtils;
 
 namespace WebApplication1.Controllers
@@ -14,7 +15,6 @@ namespace WebApplication1.Controllers
         public ApplicationContext db;
         OilsAndFilters OilsAndFilters;
         ChoosebyCar choosebyCar;
-
         public HomeController(ILogger<HomeController> logger, ApplicationContext context)
         {
             _logger = logger;
@@ -36,6 +36,7 @@ namespace WebApplication1.Controllers
         public IActionResult Test()
         {
             OilsAndFilters.PrepareData(db);
+            OilsAndFilters.User = null;
             return View(OilsAndFilters);
         }
 

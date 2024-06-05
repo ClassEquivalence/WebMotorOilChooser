@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="/css/Home/_Layout.css" />
 }
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,8 +22,7 @@
                 <div><h1>Добро пожаловать в помощник подбора масла!</h1></div>
             </div>
         </header>
-        <div class="header_menu_links">
-            <a href="#">Вход/регистрация</a>
+        <div class="header_menu_links" id="header_menu_links">
             <a asp-controller="Home" asp-action="@nameof(HomeController.OilChooseCar)">Подбор по модели автомобиля</a>
         </div>
 
@@ -35,5 +35,19 @@
         <p>&copy; 2023 Мой Интернет Магазин</p>
     </footer>
     @RenderSection("Scripts", required: false)
+    <script>
+        let header_menu_path = "../" + "Users/" + "HeaderHrefs";
+        async function makeHeaderHrefs() {
+            let response = await fetch(header_menu_path,
+                {
+                    method: 'GET'
+                });
+            let string = await response.text();
+            document.getElementById("header_menu_links").innerHTML = string
+                + document.getElementById("header_menu_links").innerHTML;
+        }
+        makeHeaderHrefs();
+
+    </script>
 </body>
 </html>

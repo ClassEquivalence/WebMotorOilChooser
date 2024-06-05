@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models.MotorOilStats;
+using WebApplication1.Models.ToRender;
 
 namespace WebApplication1.Models.Edit.ToRender
 {
-    public class OilList
+    public class OilList : RenderBase
     {
         public List<MotorOil> MotorOils { get; set;}
         public OilList(ApplicationContext db)

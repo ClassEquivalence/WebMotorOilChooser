@@ -3,7 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Drawing;
 using WebApplication1.Models;
+using WebApplication1.Models.Edit.ToAccept.ListUnits;
 using WebApplication1.Models.Edit.ToRender;
+using WebApplication1.Models.ToRender;
+using WebApplication1.Models.Users;
+using WebApplication1.Services;
+using WebApplication1.Services.Auth;
 
 namespace WebApplication1.Controllers
 {
@@ -12,18 +17,30 @@ namespace WebApplication1.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         public ApplicationContext db;
+        protected UsersService _us;
         public EditController(ILogger<HomeController> logger, ApplicationContext context)
         {
             _logger = logger;
             db = context;
+            _us = new(new PasswordHasher(), db);
         }
         public IActionResult OilList()
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
             var OilList = new OilList(db);
             return View(OilList);
         }
         public IActionResult EditOilList(int? delete, int? edit, int? add)
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
             _logger.LogInformation("LoggerAtReady! ");
             if (Request.Query.ContainsKey("delete"))
             {
@@ -46,6 +63,11 @@ namespace WebApplication1.Controllers
         }
         public IActionResult EditOil(int id)
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
             if (id != -1)
             {
                 var oil = db.MotorOils.Include(qc => qc.APIQualityClass).Include(sae=>sae.SAEViscosity).Where(mo => mo.id == id).ToList()[0];
@@ -61,6 +83,11 @@ namespace WebApplication1.Controllers
         }
         public IActionResult EditedAddedOil(Models.Edit.ToAccept.MotorOil motorOil)
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
             IFormFile f = motorOil.oilImgInput;
             var mo = motorOil.toMotorOil(db);
             mo.SaveImg(f);
@@ -68,9 +95,53 @@ namespace WebApplication1.Controllers
         }
         public IActionResult OilMerchList()
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u==null || !u.Role.Permission.CanEditMerch)
+                return BadRequest();
+
             MerchList model = new MerchList(db);
             return View(model);
         }
+        [HttpGet]
+        public IActionResult CreateMerch()
+        {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditMerch)
+                return BadRequest();
+            //post, put, delete
+            Models.Edit.ToRender.ListUnits.Merch merch = new(db);
+            return PartialView(merch);
+        }
+        [HttpPut]
+        public IActionResult PutMerch(Merch merch)
+        {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditMerch)
+                return BadRequest();
+
+            MotorOilMerch m = db.MotorOilMerches.Where(m => m.id == merch.merchId).ToList()[0];
+            //post, put, delete
+            merch.ToMotorOilMerch(m);
+            db.SaveChanges();
+            return NoContent();
+        }
+        [HttpDelete]
+        public IActionResult DeleteMerch(int id)
+        {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditMerch)
+                return BadRequest();
+            //post, put, delete
+            MotorOilMerch m = db.MotorOilMerches.Where(m => m.id == id).ToList()[0];
+            db.Remove(m);
+            db.SaveChanges();
+            return NoContent();
+        }
+
         public IActionResult StoreList()
         {
             return View();
@@ -87,9 +158,15 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
-        public IActionResult ConditionList()
+        public IActionResult ConditionsList()
         {
-            return View();
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
+            ConditionsList cl = new(db);
+            return View(cl);
         }
     }
 }

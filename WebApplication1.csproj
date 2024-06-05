@@ -14,11 +14,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Home\HeaderHrefs.cshtml" />
     <Content Remove="wwwroot\js\home\OilChooseCar.js" />
   </ItemGroup>
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Edit\OilList.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Home\HeaderHrefs.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\js\home\OilChooseCar.js" />
   </ItemGroup>
 
@@ -35,6 +37,7 @@
 
 
   <ItemGroup>
+    <Folder Include="Views\Edit\ListUnits\" />
     <Folder Include="wwwroot\css\Home\" />
     <Folder Include="wwwroot\css\Edit\" />
   </ItemGroup>
@@ -42,6 +45,11 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Edit\OilList.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Home\HeaderHrefs.cshtml" />
   </ItemGroup>
 
 </Project>

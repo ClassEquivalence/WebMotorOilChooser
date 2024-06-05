@@ -57,5 +57,20 @@ namespace WebApplication1.Services
         {
             return RandomNumberGenerator.GetHexString(sessionIdLength);
         }
+        public User? GetUserBySessionId(string s_id)
+        {
+            if (s_id != null)
+            {
+                var u = _db.Users.Include(p => p.Role).ThenInclude(r=>r.Permission).
+                    Where(u => u.SessionId == s_id).
+                ToList();
+                if(u.Count==1)
+                    return u[0];
+                else
+                    return null;
+            }
+            else
+                return null;
+        }
     }
 }

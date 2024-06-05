@@ -4,6 +4,6 @@
     {
         public string? Name { get; set; }
         public Permission? Permission {  get; set; }
-        public string? PermissionId { get; set;}
+        public int? PermissionId { get; set;}
     }
 }
