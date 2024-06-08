@@ -40,13 +40,6 @@ namespace WebApplication1.Controllers
             return View(OilsAndFilters);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> TForm(MotorOil motoroil)
-        {
-            db.MotorOils.Add(motoroil);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Test");
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -58,15 +51,6 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult Filters(Models.FormsData.OilFiltersFormData FormData)
         {
-            //_logger.LogInformation(FormData.Name);
-            /*
-            //Models.FormsData.OilFiltersFormData FormData = new Models.FormsData.OilFiltersFormData(Request.Form);
-            _logger.LogInformation("sent");
-            foreach (string key in Request.Form.Keys)
-            {
-                _logger.LogInformation("Key: "+ key + " Type: " + Request.Form[key].GetType() + " Content: " + Request.Form[key]);
-            }
-            */
             if(Request.Form.Keys.Contains("Car"))
             {
                 choosebyCar.PrepareData(db, FormData, Request.Form["Car"]);
@@ -93,21 +77,6 @@ namespace WebApplication1.Controllers
             choosebyCar.PrepareData(db);
             return View(choosebyCar);
         }
-        /*
-
-        [HttpPost]
-        public IActionResult Filters(Models.FormsData.OilFiltersFormData FormData, string Motor)
-        {
-            choosebyMotor.PrepareData(db, FormData, Motor);
-            return PartialView(choosebyMotor);
-        }
-        [HttpPost]
-        public IActionResult Filters(string Car, Models.FormsData.OilFiltersFormData FormData)
-        {
-            choosebyCar.PrepareData(db, FormData, Car);
-            return PartialView(choosebyCar);
-        }
-        */
         public IActionResult initSomeTestDb()
         {
             TestDBMaker tdb = new TestDBMaker();

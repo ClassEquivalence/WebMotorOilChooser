@@ -1,7 +1,11 @@
 ﻿@model WebApplication1.Models.ToRender.RenderBase;
 @using WebApplication1.Controllers
 
-@if (Model.User.Role.Name == "CompanyOwner")
+@if(Model.User==null || Model.User.Role.Name=="Default")
+{
+    <a asp-controller="Users" asp-action="UserLogin">Вход/регистрация</a>
+}
+else if (Model.User.Role.Name == "CompanyOwner")
 {
     <a href="#">Управление данными компании</a>
 }

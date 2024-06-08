@@ -21,56 +21,12 @@ namespace WebApplication1.Models.ChoiceHelpers
             BaseConditions.Concat(APIQualityConditions);
             BaseConditions.Sort();
         }
-        /*
-        public bool OilAcceptable(MotorOil oil)
-        {
-            if (!listPrepared)
-            {
-                PrepareConditionList();
-                listPrepared = true;
-            }
-            bool suits = false;
-            foreach (BaseCondition c in BaseConditions)
-            {
-                if (c.isAllowing && c.isOilAcceptable(oil))
-                    suits = true;
-                else if (!c.isAllowing && !c.isOilAcceptable(oil))
-                    suits = false;
-            }
-            return suits;
-        }
-        */
-
         public bool OilAcceptable(MotorOil oil)
         {
             return OilSuitsSpecificConds(oil, APIQualityConditions.ToArray())
                 && OilSuitsSpecificConds(oil, OilTypeConditions.ToArray())
                 && OilSuitsSpecificConds(oil, SAEViscosityConditions.ToArray());
         }
-
-        /*
-        bool OilSuitsSAEConds(MotorOil oil)
-        {
-            if(OilTypeConditions==null || OilTypeConditions.Count==0) 
-                return true;
-            //else...
-            OilTypeConditions.Sort();
-            bool isFirst = false, suits;
-            foreach(OilTypeCondition cond in OilTypeConditions)
-            {
-                if (!isFirst)
-                {
-                    suits = !cond.isAllowing;
-                    isFirst = true;
-                }
-
-                if (cond.isAllowing && cond.isOilAcceptable(oil))
-                    suits = true;
-                else if (!cond.isAllowing && !cond.isOilAcceptable(oil))
-                    suits = false;
-            }
-        }
-        */
         bool OilSuitsSpecificConds(MotorOil oil, BaseCondition[] condsList)
         {
             if (condsList == null || condsList.Length==0)
