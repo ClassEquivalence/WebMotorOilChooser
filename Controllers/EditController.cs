@@ -142,6 +142,11 @@ namespace WebApplication1.Controllers
             return NoContent();
         }
 
+        public string Test(int id)
+        {
+            return "Lo" + id.ToString() + "ool";
+        }
+
         public IActionResult StoreList()
         {
             return View();

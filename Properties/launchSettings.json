@@ -23,7 +23,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7259;http://localhost:5171",
-      "launchUrl": "Home/Test",
+      "launchUrl": "Edit/ConditionsList",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <Content Remove="Views\Home\HeaderHrefs.cshtml" />
+    <Content Remove="wwwroot\js\edit\ConditionsList.js" />
     <Content Remove="wwwroot\js\home\OilChooseCar.js" />
   </ItemGroup>
 
@@ -22,10 +23,12 @@
     <_ContentIncludedByDefault Remove="Views\Edit\AdminPanel.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Edit\OilList.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Home\HeaderHrefs.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\edit\ConditionsList.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\home\OilChooseCar.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\edit\ConditionsList.js" />
     <None Include="wwwroot\js\home\OilChooseCar.js" />
   </ItemGroup>
 

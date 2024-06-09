@@ -1,1 +1,17 @@
-﻿
+﻿.condset {
+    box-shadow: 0 0 20px #ffe292;
+    padding: 0px;
+    border-radius: 2em;
+    margin: 15px 0;
+}
+
+.condclass {
+    padding: 20px;
+    margin: 0px;
+    border-top: 5px solid #f7ce00;
+}
+
+.condunit {
+    border-top: 2px solid #f7ce00;
+    padding: 5px 0;
+}

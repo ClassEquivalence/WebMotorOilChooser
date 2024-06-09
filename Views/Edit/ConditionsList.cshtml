@@ -5,7 +5,7 @@
 @section Styles {
     <link rel="stylesheet" href="/css/Home/_Layout.css" />
     <link rel="stylesheet" href="/css/Home/Test.css" />
-    <link rel="stylesheet" href="/css/Home/Test.css" />
+    <link rel="stylesheet" href="/css/Edit/ConditionsList.css" />
 }
 
 @section Scripts {
@@ -14,106 +14,121 @@
         let PathDelete = "DeleteMerch/";
         let PathPut = "PutMerch/";
     </script>
-    <script src="/js/Edit/OilMerchList.js"></script>
+    <script src="/js/Edit/ConditionsList.js"></script>
 }
 
 <div id="condsGlobalContainer">
     <h3>Список условий выбора масла</h3>
-    @foreach(var cond in Model.Conditions)
+    @foreach (var cond in Model.Conditions)
     {
-        <div>
+        <div class="condset">
             <h4>Id: @cond.id</h4>
 
-            <div>
+            <div class="condclass" id="OilTypeCondClass @cond.id">
                 <h3>Список условий(допустимые масла):</h3>
-                @foreach(var condunit in cond.OilTypeConditions)
+                @foreach (var condunit in cond.OilTypeConditions)
                 {
-                    <label for="priorityOil @condunit.id @cond.id">Масло:</label>
-                    <input type="number" name="priorityOil @condunit.id" value="@condunit.priority" id="priorityOil @condunit.id @cond.id" />
-                    <label for="isAllowingOil @condunit.id @cond.id">Масло:</label>
-                    @if (condunit.isAllowing)
-                    {
-                        <input type="checkbox" name="isAllowingOil @condunit.id" id="isAllowingOil @condunit.id @cond.id" checked />
-                    }
-                    else
-                    {
-                        <input type="checkbox" name="isAllowingOil @condunit.id" id="isAllowingOil @condunit.id @cond.id" />
-                    }
-                    <label for="MotorOil @condunit.id @cond.id">Масло:</label>
-                    <select name="MotorOil @condunit.id" id="MotorOil @condunit.id @cond.id">
-                        @foreach(var oil in Model.Oils)
+                    <form class="condunit" id="OilCondClassForm @condunit.id">
+                        <label for="priorityOil @condunit.id @cond.id">Приоритет условия:</label>
+                        <input type="number" name="priorityOil" value="@condunit.priority" id="priorityOil @condunit.id @cond.id" />
+                        <label for="isAllowingOil @condunit.id @cond.id">Условие - разрешающее?:</label>
+                        @if (condunit.isAllowing)
                         {
-                            if (oil == condunit.MotorOil)
-                            {
-                                <option value="@oil.id" selected>@oil</option>
-                            }
-                            else
-                            {
-                                <option value="@oil.id">@oil</option>
-                            }
+                            <input type="checkbox" name="isAllowingOil" id="isAllowingOil @condunit.id @cond.id" checked />
                         }
-                    </select>
+                        else
+                        {
+                            <input type="checkbox" name="isAllowingOil" id="isAllowingOil @condunit.id @cond.id" />
+                        }
+                        <label for="MotorOil @condunit.id @cond.id">Масло:</label>
+                        <select name="MotorOil" id="MotorOil @condunit.id @cond.id">
+                            @foreach (var oil in Model.Oils)
+                            {
+                                if (oil == condunit.MotorOil)
+                                {
+                                    <option value="@oil.id" selected>@oil</option>
+                                }
+                                else
+                                {
+                                    <option value="@oil.id">@oil</option>
+                                }
+                            }
+                        </select>
+
+                        <input name="condId" value="@condunit.id" />
+                    </form>
                 }
+                <button type="button" class="AddOilCond" value="@cond.id">Добавить</button>
             </div>
 
-            <div>
+            <div class="condclass" id="SAECondClass @cond.id">
                 <h3>Список условий(допустимая вязкость):</h3>
                 @foreach (var condunit in cond.SAEViscosityConditions)
                 {
-                    <label for="prioritySAE @condunit.id @cond.id">Приоритет условия:</label>
-                    <input type="number" name="prioritySAE @condunit.id" value="@condunit.priority" id="prioritySAE @condunit.id @cond.id" />
-                    <label for="isAllowingSAE @condunit.id @cond.id">Условие - разрешающее?:</label>
-                    @if (condunit.isAllowing)
-                    {
-                        <input type="checkbox" name="isAllowingSAE @condunit.id" id="isAllowingSAE @condunit.id @cond.id" checked />
-                    }
-                    else
-                    {
-                        <input type="checkbox" name="isAllowingSAE @condunit.id" id="isAllowingSAE @condunit.id @cond.id" />
-                    }
-                    <label for="onColdLowerBorderSAE @condunit.id @cond.id">Вязкость(по SAE, минимальная для холодного двигателя):</label>
-                    <input type="number" name="onColdLowerBorderSAE @condunit.id" id="onColdLowerBorderSAE @condunit.id @cond.id" />
-                    <label for="onColdHigherBorderSAE @condunit.id @cond.id">Вязкость(по SAE, максимальная для холодного двигателя):</label>
-                    <input type="number" name="onColdHigherBorderSAE @condunit.id" id="onColdHigherBorderSAE @condunit.id @cond.id" />
-                    <label for="onHotLowerBorderSAE @condunit.id @cond.id">Вязкость(по SAE, минимальная для горячего двигателя):</label>
-                    <input type="number" name="onHotLowerBorderSAE @condunit.id" id="onHotLowerBorderSAE @condunit.id @cond.id" />
-                    <label for="onHotHigherBorderSAE @condunit.id @cond.id">Вязкость(по SAE, максимальная для горячего двигателя):</label>
-                    <input type="number" name="onHotHigherBorderSAE @condunit.id" id="onHotHigherBorderSAE @condunit.id @cond.id" />
+                    <form class="condunit" id="SAECondClassForm @condunit.id">
+                        <label for="prioritySAE @condunit.id @cond.id">Приоритет условия:</label>
+                        <input type="number" name="prioritySAE @condunit.id" value="@condunit.priority" id="prioritySAE @condunit.id @cond.id" />
+                        <label for="isAllowingSAE @condunit.id @cond.id">Условие - разрешающее?:</label>
+                        @if (condunit.isAllowing)
+                        {
+                            <input type="checkbox" name="isAllowingSAE @condunit.id" id="isAllowingSAE @condunit.id @cond.id" checked />
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="isAllowingSAE @condunit.id" id="isAllowingSAE @condunit.id @cond.id" />
+                        }
+                        <label for="onColdLowerBorderSAE @condunit.id @cond.id">Вязкость(по SAE, минимальная для холодного двигателя):</label>
+                        <input type="number" name="onColdLowerBorderSAE @condunit.id" id="onColdLowerBorderSAE @condunit.id @cond.id" />
+                        <label for="onColdHigherBorderSAE @condunit.id @cond.id">Вязкость(по SAE, максимальная для холодного двигателя):</label>
+                        <input type="number" name="onColdHigherBorderSAE @condunit.id" id="onColdHigherBorderSAE @condunit.id @cond.id" />
+                        <label for="onHotLowerBorderSAE @condunit.id @cond.id">Вязкость(по SAE, минимальная для горячего двигателя):</label>
+                        <input type="number" name="onHotLowerBorderSAE @condunit.id" id="onHotLowerBorderSAE @condunit.id @cond.id" />
+                        <label for="onHotHigherBorderSAE @condunit.id @cond.id">Вязкость(по SAE, максимальная для горячего двигателя):</label>
+                        <input type="number" name="onHotHigherBorderSAE @condunit.id" id="onHotHigherBorderSAE @condunit.id @cond.id" />
+
+                        <input name="condId" value="@condunit.id" />
+                    </form>
                 }
+                <button type="button" class="AddSAECond" value="@cond.id">Добавить</button>
             </div>
 
-            <div>
+            <div class="condclass" id="APICondClass @cond.id">
                 <h3>Список условий(минимальный класс качества):</h3>
                 @foreach (var condunit in cond.APIQualityConditions)
                 {
-                    <label for="priorityAPI @condunit.id @cond.id">Приоритет условия:</label>
-                    <input type="number" id="priorityAPI @condunit.id @cond.id" name="priorityAPI @condunit.id" value="@condunit.priority" />
-                    <label for="isAllowingAPI @condunit.id @cond.id">Условие - разрешающее?:</label>
-                    @if (condunit.isAllowing)
-                    {
-                        <input type="checkbox" id="isAllowingAPI @condunit.id @cond.id" name="isAllowingAPI @condunit.id" checked />
-                    }
-                    else
-                    {
-                        <input type="checkbox" id="isAllowingAPI @condunit.id @cond.id" name="isAllowingAPI @condunit.id" />
-                    }
-                    <label for="MinAPIClass @condunit.id @cond.id">Минимальный класс качества:</label>
-                    <select name="MinAPIClass @condunit.id" id="MinAPIClass @condunit.id @cond.id">
-                        @foreach (var apiclass in Model.APIQualityClasses)
+                    <form class="condunit" id="APICondClassForm @condunit.id">
+                        <label for="priorityAPI @condunit.id @cond.id">Приоритет условия:</label>
+                        <input type="number" id="priorityAPI @condunit.id @cond.id" name="priorityAPI @condunit.id" value="@condunit.priority" />
+                        <label for="isAllowingAPI @condunit.id @cond.id">Условие - разрешающее?:</label>
+                        @if (condunit.isAllowing)
                         {
-                            if (apiclass == condunit.MinAPIQualityClass)
-                            {
-                                <option value="@apiclass.id" selected>@apiclass.Name</option>
-                            }
-                            else
-                            {
-                                <option value="@apiclass.id">@apiclass.Name</option>
-                            }
+                            <input type="checkbox" id="isAllowingAPI @condunit.id @cond.id" name="isAllowingAPI @condunit.id" checked />
                         }
-                    </select>
+                        else
+                        {
+                            <input type="checkbox" id="isAllowingAPI @condunit.id @cond.id" name="isAllowingAPI @condunit.id" />
+                        }
+                        <label for="MinAPIClass @condunit.id @cond.id">Минимальный класс качества:</label>
+                        <select name="MinAPIClass @condunit.id" id="MinAPIClass @condunit.id @cond.id">
+                            @foreach (var apiclass in Model.APIQualityClasses)
+                            {
+                                if (apiclass == condunit.MinAPIQualityClass)
+                                {
+                                    <option value="@apiclass.id" selected>@apiclass.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@apiclass.id">@apiclass.Name</option>
+                                }
+                            }
+                        </select>
+
+                        <input name="condId" value="@condunit.id" />
+                    </form>
                 }
+                <button type="button" class="AddAPICond" value="@cond.id">Добавить</button>
             </div>
         </div>
     }
 </div>
-<input type="button" id="addEl" value="Добавить" />
+<input type="button" id="addSet" value="Добавить" />
