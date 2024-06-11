@@ -22,5 +22,10 @@
             else
                 return 0;
         }
+        public BaseCondition()
+        {
+            priority = 1;
+            isAllowing = true;
+        }
     }
 }

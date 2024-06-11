@@ -6,6 +6,7 @@ namespace WebApplication1.Models.ChoiceHelpers.Conditions
     {
         //минимально допустимый класс качества
         public APIQualityClass MinAPIQualityClass { get; set; }
+        public int MinAPIQualityClassId { get; set; }
         public override bool OilSuitsCondition(MotorOil oil)
         {
             if (oil.APIQualityClass >= MinAPIQualityClass)
@@ -13,5 +14,6 @@ namespace WebApplication1.Models.ChoiceHelpers.Conditions
             else
                 return false;
         }
+        public APIQualityCondition(): base() { }
     }
 }

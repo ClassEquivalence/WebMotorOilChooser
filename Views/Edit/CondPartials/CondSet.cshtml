@@ -1,0 +1,124 @@
+﻿@model CondSet;
+@using WebApplication1.Models.Edit.ToRender.ListUnits;
+@using WebApplication1.Models.ChoiceHelpers;
+@using WebApplication1.Controllers;
+
+
+
+<div class="condset" data-condsetid="@Model.ConditionsSet.id">
+    <h4>Id: @Model.ConditionsSet.id</h4>
+
+    <div class="condclass" id="OilCondClass @Model.ConditionsSet.id"
+         data-condtype="OilCond">
+        <h3>Список условий(допустимые масла):</h3>
+        @foreach (var condunit in Model.ConditionsSet.OilTypeConditions)
+        {
+            <form class="condunit" id="OilCondClassForm @condunit.id"
+                  data-condtype="OilCond" data-condid="@condunit.id">
+                <label for="priorityOil @condunit.id @Model.ConditionsSet.id">Приоритет условия:</label>
+                <input type="number" name="priorityOil" value="@condunit.priority" id="priorityOil @condunit.id @Model.ConditionsSet.id" />
+                <label for="isAllowingOil @condunit.id @Model.ConditionsSet.id">Условие - разрешающее?:</label>
+
+                <input type="checkbox" asp-for="@condunit.isAllowing" name="isAllowingOil" id="isAllowingOil @condunit.id @Model.ConditionsSet.id" checked="@condunit.isAllowing" />
+
+                <label for="MotorOil @condunit.id @Model.ConditionsSet.id">Масло:</label>
+                <select name="MotorOil" asp-for="@condunit.MotorOilId" id="MotorOil @condunit.id @Model.ConditionsSet.id">
+                    @foreach (var oil in Model.Oils)
+                    {
+                        if (oil == condunit.MotorOil)
+                        {
+                            <option value="@oil.id" selected>@oil</option>
+                        }
+                        else
+                        {
+                            <option value="@oil.id">@oil</option>
+                        }
+                    }
+                </select>
+
+                <input name="condId" value="@condunit.id" hidden />
+            </form>
+            <button name="delCond" value="@condunit.id"
+                    data-condtype="OilCond">
+                Удалить условие
+            </button>
+        }
+    </div>
+    <button type="button" class="AddOilCond" value="@Model.ConditionsSet.id">Добавить</button>
+
+
+    <div class="condclass" id="SAECondClass @Model.ConditionsSet.id"
+         data-condtype="SAECond">
+        <h3>Список условий(допустимая вязкость):</h3>
+        @foreach (var condunit in Model.ConditionsSet.SAEViscosityConditions)
+        {
+            <form class="condunit" id="SAECondClassForm @condunit.id"
+                  data-condtype="SAECond" data-condid="@condunit.id">
+                <label for="prioritySAE @condunit.id @Model.ConditionsSet.id">Приоритет условия:</label>
+                <input type="number" name="prioritySAE" value="@condunit.priority" id="prioritySAE @condunit.id @Model.ConditionsSet.id" />
+                <label for="isAllowingSAE @condunit.id @Model.ConditionsSet.id">Условие - разрешающее?:</label>
+
+                <input type="checkbox" asp-for="@condunit.isAllowing" name="isAllowingSAE" id="isAllowingSAE @condunit.id @Model.ConditionsSet.id" checked="@condunit.isAllowing" />
+
+                <label for="onColdLowerBorderSAE @condunit.id @Model.ConditionsSet.id">Вязкость(по SAE, минимальная для холодного двигателя):</label>
+                <input type="number" name="onColdLowerBorderSAE" id="onColdLowerBorderSAE @condunit.id @Model.ConditionsSet.id" value="@condunit.minCold" />
+                <label for="onColdHigherBorderSAE @condunit.id @Model.ConditionsSet.id">Вязкость(по SAE, максимальная для холодного двигателя):</label>
+                <input type="number" name="onColdHigherBorderSAE" id="onColdHigherBorderSAE @condunit.id @Model.ConditionsSet.id" value="@condunit.maxCold" />
+                <label for="onHotLowerBorderSAE @condunit.id @Model.ConditionsSet.id">Вязкость(по SAE, минимальная для горячего двигателя):</label>
+                <input type="number" name="onHotLowerBorderSAE" id="onHotLowerBorderSAE @condunit.id @Model.ConditionsSet.id" value="@condunit.minHot" />
+                <label for="onHotHigherBorderSAE @condunit.id @Model.ConditionsSet.id">Вязкость(по SAE, максимальная для горячего двигателя):</label>
+                <input type="number" name="onHotHigherBorderSAE" id="onHotHigherBorderSAE @condunit.id @Model.ConditionsSet.id" value="@condunit.maxHot" />
+
+                <input name="condId" value="@condunit.id" hidden />
+            </form>
+            <button name="delCond" value="@condunit.id"
+                    data-condtype="SAECond">
+                Удалить условие
+            </button>
+        }
+    </div>
+    <button type="button" class="AddSAECond" value="@Model.ConditionsSet.id">Добавить</button>
+
+
+    <div class="condclass" id="APICondClass @Model.ConditionsSet.id"
+         data-condtype="APICond">
+        <h3>Список условий(минимальный класс качества):</h3>
+        @foreach (var condunit in Model.ConditionsSet.APIQualityConditions)
+        {
+            <form class="condunit" id="APICondClassForm @condunit.id"
+                  data-condtype="APICond" data-condid="@condunit.id">
+                <label for="priorityAPI @condunit.id @Model.ConditionsSet.id">Приоритет условия:</label>
+                <input type="number" id="priorityAPI @condunit.id @Model.ConditionsSet.id" name="priorityAPI" value="@condunit.priority" />
+                <label for="isAllowingAPI @condunit.id @Model.ConditionsSet.id">Условие - разрешающее?:</label>
+
+                <input type="checkbox" asp-for="@condunit.isAllowing" id="isAllowingAPI @condunit.id @Model.ConditionsSet.id" name="isAllowingAPI" checked="@condunit.isAllowing" />
+
+                <label for="MinAPIClass @condunit.id @Model.ConditionsSet.id">Минимальный класс качества:</label>
+                <select name="MinAPIClass" asp-for="@condunit.MinAPIQualityClassId" id="MinAPIClass @condunit.id @Model.ConditionsSet.id">
+                    @foreach (var apiclass in Model.APIQualityClasses)
+                    {
+                        if (apiclass == condunit.MinAPIQualityClass)
+                        {
+                            <option value="@apiclass.id" selected>@apiclass.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@apiclass.id">@apiclass.Name</option>
+                        }
+                    }
+                </select>
+
+                <input name="condId" value="@condunit.id" hidden />
+            </form>
+            <button name="delCond" value="@condunit.id"
+                    data-condtype="APICond">
+                Удалить условие
+            </button>
+        }
+    </div>
+    <button type="button" class="AddAPICond" value="@Model.ConditionsSet.id">Добавить</button>
+
+    <button name="delCondSet" value="@Model.ConditionsSet.id">
+        Удалить набор условий
+    </button>
+</div>

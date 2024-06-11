@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Edit\AdminPanel.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Edit\CondPartials\CondSet.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Edit\OilList.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Home\HeaderHrefs.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\js\edit\ConditionsList.js" />
@@ -58,6 +59,11 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Edit\AdminPanel.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Edit\CondPartials\CondSet.cshtml" />
   </ItemGroup>
 
 </Project>

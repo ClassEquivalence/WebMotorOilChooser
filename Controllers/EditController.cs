@@ -5,6 +5,7 @@ using System.Drawing;
 using WebApplication1.Models;
 using WebApplication1.Models.Edit.ToAccept.ListUnits;
 using WebApplication1.Models.Edit.ToRender;
+using WebApplication1.Models.Edit.ToRender.ListUnits;
 using WebApplication1.Models.ToRender;
 using WebApplication1.Models.Users;
 using WebApplication1.Services;
@@ -115,7 +116,7 @@ namespace WebApplication1.Controllers
             return PartialView(merch);
         }
         [HttpPut]
-        public IActionResult PutMerch(Merch merch)
+        public IActionResult PutMerch(Models.Edit.ToAccept.ListUnits.Merch merch)
         {
             var u = _us.GetUserBySessionId(Request.
                     Cookies[Models.Users.User.SessionIdCookieName]);
@@ -140,11 +141,6 @@ namespace WebApplication1.Controllers
             db.Remove(m);
             db.SaveChanges();
             return NoContent();
-        }
-
-        public string Test(int id)
-        {
-            return "Lo" + id.ToString() + "ool";
         }
 
         public IActionResult StoreList()
@@ -172,6 +168,129 @@ namespace WebApplication1.Controllers
 
             ConditionsList cl = new(db);
             return View(cl);
+        }
+
+        public IActionResult addCondSet()
+        {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
+            CondSet cs = new(db);
+            return PartialView("Views/Edit/CondPartials/CondSet.cshtml", cs);
+        }
+
+        public IActionResult addOilCond(int id)
+        {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
+            OilCond oc = new(db, id);
+            return PartialView("Views/Edit/CondPartials/addOilCond.cshtml", oc);
+        }
+        public IActionResult addSAECond(int id)
+        {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
+            SAECond sc = new(db, id);
+            return PartialView("Views/Edit/CondPartials/addSAECond.cshtml", sc);
+        }
+        public IActionResult addAPICond(int id)
+        {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
+            APICond ac = new(db, id);
+            return PartialView("Views/Edit/CondPartials/addAPICond.cshtml", ac);
+        }
+
+        public IActionResult putOilCond(OilCondPUT ocp)
+        {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
+            var cond = db.OilTypeConditions.Where(otc => otc.id == ocp.condId)
+                .ToList()[0];
+            cond.priority = ocp.priorityOil;
+            cond.MotorOilId = ocp.MotorOil;
+            cond.isAllowing = ocp.isAllowingOil;
+            db.SaveChanges();
+            return NoContent();
+        }
+        public IActionResult putSAECond(SAECondPUT scp)
+        {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
+            var cond = db.SAEViscosityConditions.Where(svc => svc.id == scp.condId)
+                .ToList()[0];
+            cond.priority = scp.prioritySAE;
+            cond.isAllowing = scp.isAllowingSAE;
+            cond.minCold = scp.onColdLowerBorderSAE;
+            cond.maxCold = scp.onColdHigherBorderSAE;
+            cond.minHot = scp.onHotLowerBorderSAE;
+            cond.maxHot = scp.onHotHigherBorderSAE;
+            db.SaveChanges();
+            return NoContent();
+        }
+        public IActionResult putAPICond(APICondPUT acp)
+        {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
+            var cond = db.APIQualityConditions.Where(aqc => aqc.id == acp.condId)
+                .ToList()[0];
+            cond.priority = acp.priorityAPI;
+            cond.isAllowing = acp.isAllowingAPI;
+            cond.MinAPIQualityClassId = acp.MinAPIClass;
+            db.SaveChanges();
+            return NoContent();
+        }
+
+
+        public IActionResult delCondSet(int id)
+        {
+            var cs = db.ConditionsSets.Where(cs => cs.id == id).ToList()[0];
+            db.ConditionsSets.Remove(cs);
+            db.SaveChanges();
+            return NoContent();
+        }
+        public IActionResult delOilCond(int id)
+        {
+            var cs = db.OilTypeConditions.Where(cs => cs.id == id).ToList()[0];
+            db.OilTypeConditions.Remove(cs);
+            db.SaveChanges();
+            return NoContent();
+        }
+        public IActionResult delSAECond(int id)
+        {
+            var cs = db.SAEViscosityConditions.
+                Where(cs => cs.id == id).ToList()[0];
+            db.SAEViscosityConditions.Remove(cs);
+            db.SaveChanges();
+            return NoContent();
+        }
+        public IActionResult delAPICond(int id)
+        {
+            var cs = db.APIQualityConditions.
+                Where(cs => cs.id == id).ToList()[0];
+            db.APIQualityConditions.Remove(cs);
+            db.SaveChanges();
+            return NoContent();
         }
     }
 }

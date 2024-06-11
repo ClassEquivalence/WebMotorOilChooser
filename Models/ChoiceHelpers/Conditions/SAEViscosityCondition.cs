@@ -14,5 +14,12 @@
             else
                 return false;
         }
+        public SAEViscosityCondition(): base() 
+        {
+            minCold = 0;
+            maxCold = 0;
+            minHot = 0;
+            maxHot = 0;
+        }
     }
 }

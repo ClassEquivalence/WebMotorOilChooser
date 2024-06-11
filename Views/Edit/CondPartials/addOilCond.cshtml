@@ -1,0 +1,37 @@
+﻿@model OilCond;
+@using WebApplication1.Models.Edit.ToRender;
+@using WebApplication1.Models.ChoiceHelpers;
+@using WebApplication1.Controllers;
+@using WebApplication1.Models.Edit.ToRender.ListUnits;
+
+
+
+<form class="condunit" id="OilCondClassForm @Model.OilTypeCondition.id"
+      data-condtype="OilCond" data-condid="@Model.OilTypeCondition.id">
+    <label for="priorityOil @Model.OilTypeCondition.id @Model.condSetId">Приоритет условия:</label>
+    <input type="number" name="priorityOil" value="@Model.OilTypeCondition.priority" id="priorityOil @Model.OilTypeCondition.id @Model.condSetId" />
+    <label for="isAllowingOil @Model.OilTypeCondition.id @Model.condSetId">Условие - разрешающее?:</label>
+
+    <input type="checkbox" asp-for="@Model.OilTypeCondition.isAllowing" name="isAllowingOil" id="isAllowingOil @Model.OilTypeCondition.id @Model.condSetId" checked="@Model.OilTypeCondition.isAllowing" />
+
+    <label for="MotorOil @Model.OilTypeCondition.id @Model.condSetId">Масло:</label>
+    <select name="MotorOil" asp-for="@Model.OilTypeCondition.MotorOilId" id="MotorOil @Model.OilTypeCondition.id @Model.condSetId">
+        @foreach (var oil in Model.Oils)
+        {
+            if (oil == Model.OilTypeCondition.MotorOil)
+            {
+                <option value="@oil.id" selected>@oil</option>
+            }
+            else
+            {
+                <option value="@oil.id">@oil</option>
+            }
+        }
+    </select>
+
+    <input name="condId" value="@Model.OilTypeCondition.id" hidden />
+</form>
+<button name="delCond" value="@Model.OilTypeCondition.id"
+        data-condtype="OilCond">
+    Удалить условие
+</button>

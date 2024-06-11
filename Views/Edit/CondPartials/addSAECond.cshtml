@@ -1,0 +1,31 @@
+﻿@model SAECond;
+@using WebApplication1.Models.Edit.ToRender;
+@using WebApplication1.Models.ChoiceHelpers;
+@using WebApplication1.Controllers;
+@using WebApplication1.Models.Edit.ToRender.ListUnits;
+
+
+<form class="condunit" id="SAECondClassForm @Model.SAEViscosityCondition.id"
+      data-condtype="SAECond" data-condid="@Model.SAEViscosityCondition.id">
+    <label for="prioritySAE @Model.SAEViscosityCondition.id @Model.condSetId">Приоритет условия:</label>
+    <input type="number" name="prioritySAE" value="@Model.SAEViscosityCondition.priority" id="prioritySAE @Model.SAEViscosityCondition.id @Model.condSetId" />
+    <label for="isAllowingSAE @Model.SAEViscosityCondition.id @Model.condSetId">Условие - разрешающее?:</label>
+
+    <input type="checkbox" asp-for="@Model.SAEViscosityCondition.isAllowing" name="isAllowingSAE" id="isAllowingSAE @Model.SAEViscosityCondition.id @Model.condSetId" checked="@Model.SAEViscosityCondition.isAllowing" />
+
+    <label for="onColdLowerBorderSAE @Model.SAEViscosityCondition.id @Model.condSetId">Вязкость(по SAE, минимальная для холодного двигателя):</label>
+    <input type="number" name="onColdLowerBorderSAE" id="onColdLowerBorderSAE @Model.SAEViscosityCondition.id @Model.condSetId" value="@Model.SAEViscosityCondition.minCold" />
+    <label for="onColdHigherBorderSAE @Model.SAEViscosityCondition.id @Model.condSetId">Вязкость(по SAE, максимальная для холодного двигателя):</label>
+    <input type="number" name="onColdHigherBorderSAE" id="onColdHigherBorderSAE @Model.SAEViscosityCondition.id @Model.condSetId" value="@Model.SAEViscosityCondition.maxCold" />
+    <label for="onHotLowerBorderSAE @Model.SAEViscosityCondition.id @Model.condSetId">Вязкость(по SAE, минимальная для горячего двигателя):</label>
+    <input type="number" name="onHotLowerBorderSAE" id="onHotLowerBorderSAE @Model.SAEViscosityCondition.id @Model.condSetId" value="@Model.SAEViscosityCondition.minHot" />
+    <label for="onHotHigherBorderSAE @Model.SAEViscosityCondition.id @Model.condSetId">Вязкость(по SAE, максимальная для горячего двигателя):</label>
+    <input type="number" name="onHotHigherBorderSAE" id="onHotHigherBorderSAE @Model.SAEViscosityCondition.id @Model.condSetId" value="@Model.SAEViscosityCondition.maxHot" />
+
+    <input name="condId" value="@Model.SAEViscosityCondition.id" hidden />
+</form>
+<button name="delCond" value="@Model.SAEViscosityCondition.id"
+        data-condtype="SAECond">
+    Удалить условие
+</button>
+
