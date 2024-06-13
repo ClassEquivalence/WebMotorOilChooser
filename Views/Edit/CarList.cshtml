@@ -1,0 +1,24 @@
+﻿@model List<CarType>;
+@using WebApplication1.Models.ChoiceHelpers;
+@using WebApplication1.Controllers;
+
+@section Styles {
+    <link rel="stylesheet" href="/css/Home/_Layout.css" />
+    <link rel="stylesheet" href="/css/Home/Test.css" />
+    <link rel="stylesheet" href="/css/Edit/CommonEditStyle.css" />
+}
+
+@section Scripts {
+    <script src="/js/Edit/FetchEditObjectsFuncs.js"></script>
+    <script src="/js/Edit/CarList.js"></script>
+}
+
+
+<!--  Company owner, company name, id -->
+
+<div class="cars globalContainer">
+    @foreach(var car in Model){
+        @Html.Partial("CarPartial", car);
+    }
+</div>
+<input type="button" id="addCarBtn" value="Добавить автомобиль" />

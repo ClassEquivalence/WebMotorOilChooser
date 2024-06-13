@@ -2,6 +2,8 @@
 using WebApplication1.Models.ChoiceHelpers;
 using WebApplication1.Models.ChoiceHelpers.Conditions;
 using WebApplication1.Models.MotorOilStats;
+using WebApplication1.Models.Users;
+using WebApplication1.Services;
 
 namespace WebApplication1.TestUtils
 {
@@ -9,6 +11,7 @@ namespace WebApplication1.TestUtils
     {
         public bool testModeOn = true;
         public ApplicationContext db;
+        public UsersService _us;
         public void initTestDb()
         {
 
@@ -245,6 +248,79 @@ namespace WebApplication1.TestUtils
 
              */
 
+            List<Permission> perms = new();
+            Permission admPerm = new();
+            Permission defPerm = new();
+            Permission cownPerm = new();
+            admPerm.CanEditOils = true;
+            admPerm.CanEditUsers = true;
+            admPerm.CanEditCompanies = true;
+            admPerm.CanEditMerch = true;
+            admPerm.CanEditStores = true;
+            admPerm.OwnsCompany = false;
+
+            defPerm.CanEditOils = false;
+            defPerm.CanEditUsers = false;
+            defPerm.CanEditCompanies = false;
+            defPerm.CanEditMerch = false;
+            defPerm.CanEditStores = false;
+            defPerm.OwnsCompany = false;
+
+            cownPerm.CanEditOils = false;
+            cownPerm.CanEditUsers = false;
+            cownPerm.CanEditCompanies = false;
+            cownPerm.CanEditMerch = false;
+            cownPerm.CanEditStores = false;
+            cownPerm.OwnsCompany = true;
+            perms.Add(admPerm);
+            perms.Add(defPerm);
+            perms.Add(cownPerm);
+
+            List < Role > roles = new List<Role>();
+
+            Role adminRole = new();
+            Role defaultRole = new();
+            Role companyOwnerRole = new();
+            adminRole.Name = "Admin";
+            adminRole.Permission = admPerm;
+            defaultRole.Name = "Default";
+            defaultRole.Permission = defPerm;
+            companyOwnerRole.Name = "CompanyOwner";
+            companyOwnerRole.Permission = cownPerm;
+            roles.Add(adminRole);
+            roles.Add(defaultRole);
+            roles.Add(companyOwnerRole);
+            List<User> users = new();
+            var admin = _us.Register("Admin", "Admin", "Admin");
+            var defuser = _us.Register("Defuser", "Defuser", "Defuser");
+            var cowner1 = _us.Register("Cowner1", "Cowner1", "Cowner1");
+            var cowner2 = _us.Register("Cowner2", "Cowner2", "Cowner2");
+            var cowner3 = _us.Register("Cowner3", "Cowner3", "Cowner3");
+            admin.Role = adminRole;
+            defuser.Role = defaultRole;
+            cowner1.Role = companyOwnerRole;
+            cowner2.Role = companyOwnerRole;
+            cowner3.Role = companyOwnerRole;
+            users.Add(admin);
+            users.Add(defuser);
+            users.Add(cowner1);
+            users.Add(cowner2);
+            users.Add(cowner3);
+
+            foreach (var el in perms)
+            {
+                db.Permissions.Add(el);
+            }
+            foreach (var el in roles)
+            {
+                db.Role.Add(el);
+            }
+            foreach (var el in users)
+            {
+                db.Users.Add(el);
+            }
+            db.SaveChanges();
+
             foreach (APIQualityClass el in APIclasses)
             {
                 db.APIQualityClasses.Add(el);
@@ -255,6 +331,8 @@ namespace WebApplication1.TestUtils
             }
             foreach (Company el in companies)
             {
+                int i = 0;
+                el.OwnerId = users[i++].id;
                 db.Companies.Add(el);
             }
             foreach (Store el in stores)
@@ -397,6 +475,10 @@ namespace WebApplication1.TestUtils
             car.Name = Name;
             car.conditionsSet = conds;
             return car;
+        }
+        public TestDBMaker(UsersService us)
+        {
+            _us = us;
         }
     }
 }

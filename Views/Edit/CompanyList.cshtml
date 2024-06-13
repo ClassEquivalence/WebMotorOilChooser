@@ -1,0 +1,24 @@
+﻿@model CompanyList;
+@using WebApplication1.Models.Edit.ToRender;
+@using WebApplication1.Controllers;
+
+@section Styles {
+    <link rel="stylesheet" href="/css/Home/_Layout.css" />
+    <link rel="stylesheet" href="/css/Home/Test.css" />
+    <link rel="stylesheet" href="/css/Edit/CommonEditStyle.css" />
+}
+
+@section Scripts {
+    <script src="/js/Edit/FetchEditObjectsFuncs.js"></script>
+    <script src="/js/Edit/CompanyList.js"></script>
+}
+
+
+<!--  Company owner, company name, id -->
+
+<div class="companies globalContainer">
+    @foreach(var company in Model.Companies){
+        @Html.Partial("CompanyPartial", company);
+    }
+</div>
+<input type="button" id="addCompanyBtn" value="Добавить компанию" />

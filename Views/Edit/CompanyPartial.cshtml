@@ -1,0 +1,39 @@
+﻿@model Company;
+@using WebApplication1.Models;
+@using WebApplication1.Controllers;
+
+<div class="company editUnit" id="company @Model.id">
+
+    <form class="paddingUnit companyForm">
+        Компания:
+        <input type="text" name="Name" value="@Model.Name" />
+        Владелец:
+        <select id="owner @Model.id" name="Owner" asp-for="@Model.OwnerId">
+            @foreach (var user in Company.Users)
+            {
+                if (user.id == Model.OwnerId)
+                {
+                    <option selected value="@user.id">@user</option>
+                }
+                else
+                {
+                    <option value="@user.id">@user</option>
+                }
+            }
+        </select>
+        <input type="text" hidden name="id" value="@Model.id" />
+    </form>
+    <div class="stores subEditUnit">
+        Список магазинов компании:
+        <!--  -->
+        @if (Model.Stores != null)
+        {
+            foreach (var store in Model.Stores)
+            {
+                @Html.Partial("StorePartial", store);
+            }
+        }
+    </div>
+    <input value="Добавить магазин" class="addStoreBtn" type="button" data-companyid="@Model.id" />
+    <input value="Удалить компанию" class="delCompanyBtn" type="button" data-companyid="@Model.id" />
+</div>

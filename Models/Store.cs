@@ -1,4 +1,6 @@
-﻿namespace WebApplication1.Models
+﻿using WebApplication1.Models.Users;
+
+namespace WebApplication1.Models
 {
     public class Store : BaseEntity
     {
@@ -6,5 +8,6 @@
         public int CompanyId { get; set; }
         public string? Adress { get; set; }
         public List<MotorOilMerch>? MotorOilMerches { get; set; }
+
     }
 }

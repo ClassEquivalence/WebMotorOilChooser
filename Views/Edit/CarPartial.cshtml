@@ -1,0 +1,28 @@
+﻿@model CarType;
+@using WebApplication1.Models.ChoiceHelpers;
+@using WebApplication1.Controllers;
+
+<div class="editUnit" id="car @Model.id">
+<form class="carForm" id="carForm @Model.id">
+    Название автомобиля:
+    <input type="text" name="Name" value="@Model.Name" />
+    Набор условий подбора масла:
+    <select asp-for="conditionsSetId">
+            @foreach(var cs in CarType.conditionsSets)
+            {
+                if (cs.id == Model.conditionsSetId)
+                {
+                    <option selected value="@cs.id">Условие @cs.id</option>
+                }
+                else
+                {
+                    <option value="@cs.id">Условие @cs.id</option>
+                }
+            }
+        </select>
+    <input type="text" name="id"
+           value="@Model.id" hidden />
+</form>
+
+<input value="Удалить автомобиль" class="delCarBtn" type="button" data-carid="@Model.id" id="carDelBtn @Model.id" />
+</div>

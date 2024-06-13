@@ -1,0 +1,31 @@
+﻿@model User;
+@using WebApplication1.Models.Users;
+@using WebApplication1.Controllers;
+
+<div class="user editUnit" id="user @Model.id">
+
+    <form class="paddingUnit userForm" asp-action="UpdateUser" method="post">
+        Никнейм пользователя:
+        <input type="text" name="UserName" value="@Model.UserName" />
+        Логин пользователя:
+        <input type="text" name="Login" value="@Model.Login" />
+        Пароль пользователя(заполнить при желании сменить пароль):
+        <input type="password" name="Password" />
+        Роль пользователя:
+        @foreach(var role in WebApplication1.Models.Users.User.Roles)
+        {
+            if (role.id == Model.RoleId)
+            {
+                <input type="radio" name="RoleId" value="@role.id" checked />
+                    @role.Name
+            }
+            else
+            {
+                <input type="radio" name="RoleId" value="@role.id" />
+                    @role.Name
+            }
+        }
+        <input type="text" hidden name="id" value="@Model.id" />
+        <input type="submit" value="Сохранить пользователя" />
+    </form>
+</div>

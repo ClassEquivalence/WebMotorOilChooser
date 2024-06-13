@@ -7,5 +7,14 @@ namespace WebApplication1.Models
         public string? Name { get; set; }
         public List<Store>? Stores { get; set; }
         public User? Owner { get; set; }
+        public int? OwnerId { get; set; }
+
+
+        public static List<User>? Users;
+        public static void initUsers(ApplicationContext db)
+        {
+            Users = db.Users.ToList();
+        }
     }
 }
+

@@ -9,7 +9,6 @@ namespace WebApplication1.Models.ChoiceHelpers
         public List<OilTypeCondition> OilTypeConditions { get; set; }
         public List<SAEViscosityCondition> SAEViscosityConditions { get; set; }
         public List<CarType> carTypes { get; set; }
-        public List<MotorType> motorTypes { get; set; }
 
         //Это не свойство, поэтому в БД оно не попадёт.
         public List<BaseCondition> BaseConditions;

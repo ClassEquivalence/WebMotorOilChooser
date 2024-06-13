@@ -15,12 +15,14 @@ namespace WebApplication1.Controllers
         public ApplicationContext db;
         OilsAndFilters OilsAndFilters;
         ChoosebyCar choosebyCar;
+        UsersService _us;
         public HomeController(ILogger<HomeController> logger, ApplicationContext context)
         {
             _logger = logger;
             db = context;
             OilsAndFilters = new OilsAndFilters();
             choosebyCar = new ChoosebyCar();
+            _us = new(new PasswordHasher(), db);
         }
 
         public IActionResult Index()
@@ -79,7 +81,7 @@ namespace WebApplication1.Controllers
         }
         public IActionResult initSomeTestDb()
         {
-            TestDBMaker tdb = new TestDBMaker();
+            TestDBMaker tdb = new TestDBMaker(_us);
             tdb.db = db;
             tdb.initTestDb();
             return new NoContentResult();
