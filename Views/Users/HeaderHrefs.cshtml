@@ -1,19 +1,26 @@
 ﻿@model WebApplication1.Models.ToRender.RenderBase;
 @using WebApplication1.Controllers
 
-@if(Model.User==null || Model.User.Role.Name=="Default")
+@if(Model.User==null)
 {
     <a asp-controller="Users" asp-action="UserLogin">Вход/регистрация</a>
 }
+else if (Model.User.Role.Name == "Default")
+{
+    <a asp-controller="Users" asp-action="LogOut">Выйти</a>
+}
 else if (Model.User.Role.Name == "CompanyOwner")
 {
-    <a href="#">Управление данными компании</a>
+    <a asp-controller="Users" asp-action="LogOut">Выйти</a>
+    <a asp-controller="Edit" asp-action="CompanyControlPanel">Управление данными компании</a>
 }
 else if (Model.User.Role.Name == "Admin")
 {
-    <a href="#">Панель администрирования</a>
+    <a asp-controller="Users" asp-action="LogOut">Выйти</a>
+    <a asp-controller="Edit" asp-action="AdminPanel">Панель администрирования</a>
 }
 else
 {
     <a asp-controller="Users" asp-action="UserLogin">Вход/регистрация</a>
 }
+

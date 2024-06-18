@@ -1,16 +1,20 @@
 ﻿@model WebApplication1.Models.ToRender.OilsAndFilters
 @using WebApplication1.Models;
 @using WebApplication1.Models.MotorOilStats;
+@using WebApplication1.Controllers;
 
 @foreach (MotorOilMerch item in Model.MotorOilMerches)
 {
     <div>
-        <img src="@item.MotorOil.GetImgNamePath()" asp-append-version=true width="85%">
-        <div>
-            <p>@item.MotorOil.Name @item.MotorOil.SAEViscosity <text>@item.MotorOil.Volume</text>л</p>
-            <p>Продавец: @item.Store.Company.Name </p>
-            <h3>@item.Price Р</h3>
-        </div>
+        <a asp-action="@nameof(HomeController.OilDetails)" asp-route-id="@item.id">
+            <img src="@item.MotorOil.GetImgNamePath()" asp-append-version=true width="85%">
+            <div>
+                <p>@item.MotorOil.Name @item.MotorOil.SAEViscosity <text>@item.MotorOil.Volume</text>л</p>
+                <p>Продавец: @item.Store.Company.Name </p>
+                <h3>@item.Price Р</h3>
+                <h3>Адрес: @item.Store.Adress</h3>
+            </div>
+        </a>
     </div>
 }
 <fillertag></fillertag>

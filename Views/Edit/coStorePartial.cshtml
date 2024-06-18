@@ -1,0 +1,15 @@
+﻿@model Store;
+@using WebApplication1.Models.Edit.ToRender;
+@using WebApplication1.Controllers;
+
+
+<div id="storeCont @Model.id">
+    <form class="subEditUnit companyStore" id="store @Model.id">
+        Адрес магазина:
+        <input type="text" name="Adress" value="@Model.Adress" />
+        <input type="text" name="id"
+               value="@Model.id" hidden />
+    </form>
+
+    <input value="Удалить магазин" class="delStoreBtn" type="button" data-storeid="@Model.id" id="storeDelBtn @Model.id" />
+</div>

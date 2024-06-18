@@ -1,0 +1,29 @@
+﻿@model Company;
+@using WebApplication1.Models.Edit.ToRender;
+@using WebApplication1.Controllers;
+
+@section Styles {
+    <link rel="stylesheet" href="/css/Home/_Layout.css" />
+    <link rel="stylesheet" href="/css/Home/Test.css" />
+    <link rel="stylesheet" href="/css/Edit/CommonEditStyle.css" />
+}
+
+@section Scripts {
+    <script src="/js/Edit/FetchEditObjectsFuncs.js"></script>
+    <script src="/js/Edit/coCompanyList.js"></script>
+}
+
+
+<div class="editUnit">
+    <form id="companyForm">
+        Название компании:
+        <input type="text" name="Name" value="@Model.Name" />
+    </form>
+</div>
+
+<div class="stores globalContainer">
+    @foreach(var store in Model.Stores){
+        @Html.Partial("coStorePartial", store);
+    }
+</div>
+<input type="button" id="addStoreBtn" value="Добавить торговую точку" />

@@ -1,5 +1,6 @@
 ﻿using WebApplication1.Models.MotorOilStats;
 using System.Drawing;
+using WebApplication1.Models.Users;
 
 namespace WebApplication1.Models
 {
@@ -12,6 +13,8 @@ namespace WebApplication1.Models
         public int APIQualityClassId { get; set; }
         public SAEViscosity? SAEViscosity { get; set; } //вязкость
         public decimal Volume { get; set; } //объём масла
+        public Company? OwnerCompany { get; set; }
+        public int? OwnerCompanyId {  get; set; }
 
         static private string ImgPath = "DataStorage/Images/OilPictures/";
         static private string ImgPrefix = "Img";

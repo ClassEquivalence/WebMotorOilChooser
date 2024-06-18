@@ -24,5 +24,19 @@ namespace WebApplication1.Models.Edit.ToRender.ListUnits
             db.Add(Merchandise);
             db.SaveChanges();
         }
+
+        public Merch(int companyId, ApplicationContext db)
+        {
+            Stores = db.Stores.Include(c => c.Company).
+                Where(s=>s.CompanyId==companyId).ToList();
+            Merchandise = new();
+            Merchandise.Store = Stores[0];
+            MotorOils = db.MotorOils.Include(sa => sa.SAEViscosity).
+                Where(mo => mo.OwnerCompanyId == Merchandise.Store.CompanyId)
+                .ToList();
+            Merchandise.MotorOil = MotorOils[0];
+            db.Add(Merchandise);
+            db.SaveChanges();
+        }
     }
 }

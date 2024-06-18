@@ -38,6 +38,41 @@ namespace WebApplication1.TestUtils
             stores.Add(makeStore(companies[1], "г. Челябинск, ул. Братьев Кашириных, д. 68"));
             stores.Add(makeStore(companies[2], "г. Челябинск, ул. Воровского, д. 81"));
             stores.Add(makeStore(companies[0], "г. Челябинск, ул. Каслинская, д. 12"));
+            //4    012    3 
+            //0 3 2 4 1
+            //1 2 2 1 3
+            //4 0 0 3 2 3
+            //1 1 4 3 0
+
+            // 1 2 1 0 1
+            // 1 1 1 1 2
+            // 0 1 1 2 1 2
+            // 1 1 0 2 1
+            motorOils[0].OwnerCompany = companies[1];
+            motorOils[1].OwnerCompany = companies[2];
+            motorOils[2].OwnerCompany = companies[1];
+            motorOils[3].OwnerCompany = companies[0];
+            motorOils[4].OwnerCompany = companies[1];
+
+            motorOils[5].OwnerCompany = companies[1];
+            motorOils[6].OwnerCompany = companies[1];
+            motorOils[7].OwnerCompany = companies[1];
+            motorOils[8].OwnerCompany = companies[1];
+            motorOils[9].OwnerCompany = companies[2];
+
+            motorOils[10].OwnerCompany = companies[0];
+            motorOils[11].OwnerCompany = companies[1];
+            motorOils[12].OwnerCompany = companies[1];
+            motorOils[13].OwnerCompany = companies[2];
+            motorOils[14].OwnerCompany = companies[1];
+            motorOils[15].OwnerCompany = companies[2];
+
+            motorOils[16].OwnerCompany = companies[1];
+            motorOils[17].OwnerCompany = companies[1];
+            motorOils[18].OwnerCompany = companies[0];
+            motorOils[19].OwnerCompany = companies[2];
+            motorOils[20].OwnerCompany = companies[1];
+
 
             List<MotorOilMerch> merches = new List<MotorOilMerch>();
             merches.Add(makeMerch(motorOils[0], stores[0], 2272, 31));

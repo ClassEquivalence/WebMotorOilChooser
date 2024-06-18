@@ -1,0 +1,10 @@
+@model WebApplication1.Models.ToRender.RenderBase;
+
+@if (Model.User == null)
+{
+    <div><h1>Добро пожаловать в помощник подбора масла!</h1></div>
+}
+else
+{
+    <div><h1>Добро пожаловать в помощник подбора масла, @Model.User.UserName!</h1></div>
+}

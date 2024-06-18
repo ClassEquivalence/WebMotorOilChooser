@@ -27,21 +27,21 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction(nameof(OilChooseCar));
         }
-
+        /*
         public IActionResult Privacy()
         {
             return View();
         }
-
+        
         public IActionResult Test()
         {
             OilsAndFilters.PrepareData(db);
             OilsAndFilters.User = null;
             return View(OilsAndFilters);
         }
-
+        */
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -79,12 +79,22 @@ namespace WebApplication1.Controllers
             choosebyCar.PrepareData(db);
             return View(choosebyCar);
         }
+        /*
         public IActionResult initSomeTestDb()
         {
             TestDBMaker tdb = new TestDBMaker(_us);
             tdb.db = db;
             tdb.initTestDb();
             return new NoContentResult();
+        }
+        */
+
+        public IActionResult UserNameShow()
+        {
+            RenderBase rb = new();
+            rb.User = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            return PartialView(rb);
         }
     }
 }

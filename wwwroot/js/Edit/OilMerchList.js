@@ -29,7 +29,7 @@ async function addMerch() {
     //let t = await json;
     //document.getElementById("merchesGlobalContainer").append(string);
     document.getElementById("merchesGlobalContainer").innerHTML += string;
-
+    globalMakeHandlers();
 }
 
 function makeHandlers(elid) {
@@ -42,9 +42,14 @@ function makeHandlers(elid) {
     document.getElementById("del " + elid).onclick = function () { deleteMerch(elid); }
 }
 
-for (let i = 0; i < MerchIds.length; i++) {
-    makeHandlers(MerchIds[i]);
+function globalMakeHandlers() {
+    let merchForms = document.getElementsByClassName("merchForm");
+    for (let i = 0; i < merchForms.length; i++) {
+        makeHandlers(merchForms[i].id);
 
+    }
 }
 
+
+globalMakeHandlers();
 document.getElementById("addEl").onclick = function () { addMerch(); }

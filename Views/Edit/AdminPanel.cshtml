@@ -1,10 +1,14 @@
-﻿<a asp-controller="Edit" asp-action="ConditionsList">В процессе</a>
+﻿@section Styles {
+    <link rel="stylesheet" href="/css/Home/_Layout.css" />
+    <link rel="stylesheet" href="/css/Home/Test.css" />
+}
+<ul>
+    <li><a asp-controller="Edit" asp-action="ConditionsList">Управление условиями</a></li>
+    <li><a asp-controller="Edit" asp-action="CarList">Управление автомобилями</a></li>
+    <li><a asp-controller="Edit" asp-action="UserList">Управление пользователями</a></li>
+    <li><a asp-controller="Edit" asp-action="CompanyList">Управление компаниями</a></li>
+    <li><a asp-controller="Edit" asp-action="OilMerchList">Управление товарами</a></li>
+    <li><a asp-controller="Edit" asp-action="OilList">Управление маслами</a></li>
+</ul>
 
-<a asp-controller="Edit" asp-action="CarList">Не реализовано</a>
-<a asp-controller="Edit" asp-action="UsersList">Не реализовано</a>
-<a asp-controller="Edit" asp-action="CompanyList">Не реализовано</a>
-<a asp-controller="Edit" asp-action="StoreList">Не реализовано</a>
-
-<a asp-controller="Edit" asp-action="OilMerchList">Реализовано, плохая верстка</a>
-<a asp-controller="Edit" asp-action="OilList">Реализовано, плохая верстка</a>
 

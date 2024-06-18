@@ -1,0 +1,72 @@
+@using WebApplication1.Models.Edit.ToRender;
+@model WebApplication1.Models.Edit.ToRender.EditOil;
+@section Styles {
+    <link rel="stylesheet" href="/css/Home/_Layout.css" />
+    <link rel="stylesheet" href="/css/Home/Test.css" />
+
+    <link rel="stylesheet" href="/css/Edit/addoil.css" />
+
+    <link rel="stylesheet" href="/css/Edit/Croppie/croppie.css">
+}
+
+@section Scripts{
+
+    <script>
+        let editOilState = @Model.editOilState;
+        if (editOilState) {
+            var editOilImgSrc = "@Model.imgPath";
+        }
+    </script>
+    
+    <script src="/js/Edit/Croppie/croppie.js"></script>
+    <script src="/js/Edit/addoil2.js"></script>
+}
+
+<div>
+    <form id="oilForm" method="post" asp-controller="Edit" asp-action="coEditedAddedOil" enctype="multipart/form-data">
+        <div>
+            <h4>Название масла</h4>
+            <input type="text" name="OilName" value="@Model.OilName" required/>
+        </div>
+        <div>
+            <h4>Производитель</h4>
+            <input type="text" name="Producer" value="@Model.Producer" required/>
+        </div>
+        <div>
+            <h4>Класс качества</h4>
+            @foreach(var el in Model.QualityClasses)
+            {
+                if (el.id == Model.QualityClass.id)
+                {
+                    <label >@el.Name</label>
+                    <input type="radio" name="APIClass" value="@el.id" checked/>
+                }
+                else
+                {
+                    <label >@el.Name</label>
+                    <input type="radio" name="APIClass" value="@el.id" />
+                }
+            }
+        </div>
+
+        <div>
+            <h4>Вязкость на холодном двигателе:</h4>
+            <input type="number" min="0" name="SAECold" value="@Model.SAEViscosity.OnCold" />
+            <h4>Вязкость на горячем двигателе:</h4>
+            <input type="number" min="0" name="SAEHot" value="@Model.SAEViscosity.OnHot" />
+        </div>
+
+        <div>
+            <h4>Объём канистры(для указания масла на розлив укажите 0 объём)</h4>
+            <input type="number" name="Volume" value="@Model.Volume" required/>
+        </div>
+        <div>
+            <h4>Изображение</h4>
+            <div id="imgEditContainer" hidden>
+            </div>
+            <input id="oilImgInput" type="file" name="oilImgInput" />
+        </div>
+        <input type="button" value="Сохранить" id="sendData"/>
+        <input type="number" id="oilId" value="@Model.id" name="oilId" hidden />
+    </form>
+</div>

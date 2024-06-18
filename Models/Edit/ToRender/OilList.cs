@@ -11,5 +11,11 @@ namespace WebApplication1.Models.Edit.ToRender
         {
             MotorOils = db.MotorOils.Include(s=>s.SAEViscosity).Include(api=>api.APIQualityClass).ToList();
         }
+        public OilList(ApplicationContext db, int userId)
+        {
+            MotorOils = MotorOils = db.MotorOils.Where(mo=>mo.OwnerCompanyId==userId).
+                Include(s => s.SAEViscosity).Include(api => api.APIQualityClass)
+                .ToList();
+        }
     }
 }

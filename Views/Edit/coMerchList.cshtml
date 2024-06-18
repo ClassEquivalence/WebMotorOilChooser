@@ -9,9 +9,9 @@
 
 @section Scripts{
     <script>
-        let PathCreate = "CreateMerch/";
-        let PathDelete = "DeleteMerch/";
-        let PathPut = "PutMerch/";
+        let PathCreate = "coCreateMerch/";
+        let PathDelete = "coDeleteMerch/";
+        let PathPut = "coPutMerch/";
     </script>
     <script src="/js/Edit/OilMerchList.js"></script>
 }
@@ -20,7 +20,7 @@
     <h3>Список масел на продажу</h3>
     @foreach (var el in Model.MotorOilMerches)
     {
-        <form class = "merchForm" id="@el.id">
+        <form class="merchForm" id="@el.id">
             <input name="merchId" value="@el.id" hidden />
 
             <h4>Масло(номенклатура) товара</h4>
@@ -70,3 +70,4 @@
     }
 </div>
 <input type="button" id="addEl" value="Добавить"/>
+

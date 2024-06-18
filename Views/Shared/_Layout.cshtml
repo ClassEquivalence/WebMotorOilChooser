@@ -17,7 +17,7 @@
 
     <div class="everything_but_footer">
         <header>
-            <div class="header_menu">
+            <div class="header_menu" id="header_menu_cont">
                 <div><h1>Добро пожаловать в помощник подбора масла!</h1></div>
             </div>
         </header>
@@ -46,7 +46,17 @@
                 + document.getElementById("header_menu_links").innerHTML;
         }
         makeHeaderHrefs();
-
+        
+        let header_uname_path = "UserNameShow";
+        async function makeHeaderHello(){
+            let response = await fetch(header_uname_path,
+                {
+                    method: 'GET'
+                });
+            let string = await response.text();
+            document.getElementById("header_menu_cont").innerHTML = string;
+        }
+        makeHeaderHello();
     </script>
 </body>
 </html>

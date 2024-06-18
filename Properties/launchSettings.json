@@ -23,7 +23,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7259;http://localhost:5171",
-      "launchUrl": "Edit/CompanyList",
+      "launchUrl": "Edit/coCompanyView",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

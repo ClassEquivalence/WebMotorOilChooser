@@ -1,4 +1,6 @@
-﻿namespace WebApplication1.Models
+﻿using WebApplication1.Models.Users;
+
+namespace WebApplication1.Models
 {
     public class MotorOilMerch : BaseEntity
     {

@@ -33,7 +33,7 @@ namespace WebApplication1.Controllers
                 u.SetSessionCookie(HttpContext);
                 db.SaveChanges();
             }
-            return RedirectToAction("Home", "Test");
+            return RedirectToAction("OilChooseCar", "Home");
         }
         public IActionResult GetUserRegister(string name, string login, string password)
         {
@@ -45,7 +45,7 @@ namespace WebApplication1.Controllers
                 u.SetSessionCookie(HttpContext);
                 u.Role = db.Role.Where(r => r.Name == "Default").ToList()[0];
                 db.SaveChanges();
-                return RedirectToAction("Test", "Home");
+                return RedirectToAction("OilChooseCar", "Home");
             }
             else
             {
@@ -68,6 +68,12 @@ namespace WebApplication1.Controllers
             m.User = _service.GetUserBySessionId(Request.
                     Cookies[Models.Users.User.SessionIdCookieName]);
             return PartialView(m);
+        }
+
+        public IActionResult LogOut()
+        {
+            Response.Cookies.Append("SessionId", "");
+            return RedirectToAction("OilChooseCar", "Home");
         }
     }
 }
