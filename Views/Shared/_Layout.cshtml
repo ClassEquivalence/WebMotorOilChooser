@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Спецификация</title>
+    <title>@RenderSection("Title", required:false)</title>
     @RenderSection("Styles", required: false)
 </head>
 <body>
@@ -22,6 +22,7 @@
             </div>
         </header>
         <div class="header_menu_links" id="header_menu_links">
+            <a asp-controller="Home" asp-action="Guide">Помощь в использовании</a>
             <a asp-controller="Home" asp-action="@nameof(HomeController.OilChooseCar)">Подбор по модели автомобиля</a>
         </div>
 
@@ -35,7 +36,7 @@
     </footer>
     @RenderSection("Scripts", required: false)
     <script>
-        let header_menu_path = "../" + "Users/" + "HeaderHrefs";
+        let header_menu_path = "/" + "Users/" + "HeaderHrefs";
         async function makeHeaderHrefs() {
             let response = await fetch(header_menu_path,
                 {
@@ -47,7 +48,7 @@
         }
         makeHeaderHrefs();
         
-        let header_uname_path = "UserNameShow";
+        let header_uname_path = "/Home/UserNameShow";
         async function makeHeaderHello(){
             let response = await fetch(header_uname_path,
                 {

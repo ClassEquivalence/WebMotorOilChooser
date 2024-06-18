@@ -1,8 +1,12 @@
-@model WebApplication1.Models.ToRender.SpecificOilMerch
+@model WebApplication1.Models.ToRender.SpecificOilMerch;
 
 @section Styles {
     <link rel="stylesheet" href="/css/Home/_Layout.css" />
     <link rel="stylesheet" href="/css/Home/OilDetails.css" />
+}
+
+@section Title {
+    Масло @Model.OilName
 }
 
 <div class="horizontalCells">

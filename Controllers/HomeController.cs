@@ -79,7 +79,7 @@ namespace WebApplication1.Controllers
             choosebyCar.PrepareData(db);
             return View(choosebyCar);
         }
-        /*
+        
         public IActionResult initSomeTestDb()
         {
             TestDBMaker tdb = new TestDBMaker(_us);
@@ -87,7 +87,7 @@ namespace WebApplication1.Controllers
             tdb.initTestDb();
             return new NoContentResult();
         }
-        */
+        
 
         public IActionResult UserNameShow()
         {
@@ -95,6 +95,11 @@ namespace WebApplication1.Controllers
             rb.User = _us.GetUserBySessionId(Request.
                     Cookies[Models.Users.User.SessionIdCookieName]);
             return PartialView(rb);
+        }
+
+        public IActionResult Guide()
+        {
+            return View();
         }
     }
 }

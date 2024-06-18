@@ -44,6 +44,7 @@
   <ItemGroup>
     <Folder Include="Views\Edit\ListUnits\" />
     <Folder Include="wwwroot\css\Home\" />
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
 

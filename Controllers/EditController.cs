@@ -155,11 +155,21 @@ namespace WebApplication1.Controllers
         
         public IActionResult CompanyList()
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditCompanies)
+                return BadRequest();
+
             var cl = new CompanyList(db);
             return View(cl);
         }
         public IActionResult AddCompany()
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditCompanies)
+                return BadRequest();
+
             Company company = new();
             company.Owner = _us.GetUserBySessionId(Request.
                     Cookies[Models.Users.User.SessionIdCookieName]);
@@ -170,14 +180,27 @@ namespace WebApplication1.Controllers
         }
         public IActionResult UpdCompany(Company company)
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditCompanies)
+                return BadRequest();
+
             var comp = db.Companies.Where(c => c.id == company.id).ToList()[0];
             comp.Name = company.Name;
             comp.OwnerId = company.OwnerId;
+            var User = db.Users.Where(u => u.id == company.OwnerId).ToList()[0];
+            var role = db.Role.Where(r => r.Name == "CompanyOwner").ToList()[0];
+            User.Role = role;
             db.SaveChanges();
             return NoContent();
         }
         public IActionResult DelCompany(int id)
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditCompanies)
+                return BadRequest();
+
             var comp = db.Companies.Where(c => c.id == id).ToList()[0];
             db.Companies.Remove(comp);
             db.SaveChanges();
@@ -185,6 +208,11 @@ namespace WebApplication1.Controllers
         }
         public IActionResult AddStore(int id)
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditStores)
+                return BadRequest();
+
             Store store = new();
             store.CompanyId = id;
             db.Stores.Add(store);
@@ -194,6 +222,11 @@ namespace WebApplication1.Controllers
         }
         public IActionResult UpdStore(Store store)
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditStores)
+                return BadRequest();
+
             var st = db.Stores.Where(c => c.id == store.id).ToList()[0];
             st.Adress = store.Adress;
             //st.CompanyId = store.CompanyId;
@@ -202,6 +235,11 @@ namespace WebApplication1.Controllers
         }
         public IActionResult DelStore(int id)
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditStores)
+                return BadRequest();
+
             var st = db.Stores.Where(c => c.id == id).ToList()[0];
             db.Stores.Remove(st);
             db.SaveChanges();
@@ -210,6 +248,11 @@ namespace WebApplication1.Controllers
 
         public IActionResult UserList()
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditUsers)
+                return BadRequest();
+
             var users = db.Users.ToList();
             Models.Users.User.initRoles(db);
             return View(users);
@@ -217,31 +260,47 @@ namespace WebApplication1.Controllers
 
         public IActionResult UpdateUser(User user)
         {
-            var u = db.Users.Include(u=>u.Role).Where(u => u.id == user.id).ToList()[0];
-            u.UserName = user.UserName;
-            u.Login = user.Login;
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditUsers)
+                return BadRequest();
+
+
+            var User = db.Users.Include(u=>u.Role).Where(u => u.id == user.id).ToList()[0];
+            User.UserName = user.UserName;
+            User.Login = user.Login;
             var urole = db.Role.Where(r => r.id == user.RoleId).ToList()[0];
-            if(u.Role.Name!="CompanyOwner" && urole.Name == "CompanyOwner")
+            if(User.Role.Name!="CompanyOwner" && urole.Name == "CompanyOwner")
             {
                 Company comp = new();
-                comp.OwnerId = u.id;
+                comp.OwnerId = User.id;
                 db.Companies.Add(comp);
             }
-            u.RoleId = user.RoleId;
+            User.RoleId = user.RoleId;
             if(Request.Form.Keys.Contains("Password"))
-                u.PasswordHash = _ph.Generate(Request.Form["Password"]);
+                User.PasswordHash = _ph.Generate(Request.Form["Password"]);
             db.SaveChanges();
             return RedirectToAction("UserList");
         }
 
         public IActionResult CarList() 
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
             var carList = db.CarTypes.ToList();
             CarType.initConditionSets(db);
             return View(carList);
         }
         public IActionResult AddCar()
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
             CarType car = new();
             CarType.initConditionSets(db);
             if (CarType.conditionsSets.Count <= 0)
@@ -253,6 +312,11 @@ namespace WebApplication1.Controllers
         }
         public IActionResult UpdCar(CarType car)
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
             var dbcar = db.CarTypes.Where(c => c.id == car.id).ToList()[0];
             dbcar.Name = car.Name;
             dbcar.conditionsSetId = car.conditionsSetId;
@@ -261,6 +325,11 @@ namespace WebApplication1.Controllers
         }
         public IActionResult DelCar(int id)
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
             var dbcar = db.CarTypes.Where(c => c.id == id).ToList()[0];
             db.CarTypes.Remove(dbcar);
             db.SaveChanges();
@@ -372,6 +441,11 @@ namespace WebApplication1.Controllers
 
         public IActionResult delCondSet(int id)
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
             var cs = db.ConditionsSets.Include(cs=>cs.carTypes).Where(cs => cs.id == id).ToList()[0];
             db.ConditionsSets.Remove(cs);
             foreach(var ct in cs.carTypes)
@@ -383,6 +457,11 @@ namespace WebApplication1.Controllers
         }
         public IActionResult delOilCond(int id)
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
             var cs = db.OilTypeConditions.Where(cs => cs.id == id).ToList()[0];
             db.OilTypeConditions.Remove(cs);
             db.SaveChanges();
@@ -390,6 +469,11 @@ namespace WebApplication1.Controllers
         }
         public IActionResult delSAECond(int id)
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
             var cs = db.SAEViscosityConditions.
                 Where(cs => cs.id == id).ToList()[0];
             db.SAEViscosityConditions.Remove(cs);
@@ -398,6 +482,11 @@ namespace WebApplication1.Controllers
         }
         public IActionResult delAPICond(int id)
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.CanEditOils)
+                return BadRequest();
+
             var cs = db.APIQualityConditions.
                 Where(cs => cs.id == id).ToList()[0];
             db.APIQualityConditions.Remove(cs);
@@ -552,10 +641,20 @@ namespace WebApplication1.Controllers
 
         public IActionResult coUpdOil(int edit)
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.OwnsCompany)
+                return BadRequest();
+
             return RedirectToAction(nameof(coEditOil), new { id = edit });
         }
         public IActionResult coDelOil(int delete)
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.OwnsCompany)
+                return BadRequest();
+
             var oil = db.MotorOils.Where(id => id.id == delete).ToList()[0];
             db.MotorOils.Remove(oil);
             db.SaveChanges();
@@ -563,6 +662,11 @@ namespace WebApplication1.Controllers
         }
         public IActionResult coAddOil()
         {
+            var u = _us.GetUserBySessionId(Request.
+                    Cookies[Models.Users.User.SessionIdCookieName]);
+            if (u == null || !u.Role.Permission.OwnsCompany)
+                return BadRequest();
+
             return RedirectToAction(nameof(coEditOil), new { id = -1 });
         }
         public IActionResult coEditOil(int id)

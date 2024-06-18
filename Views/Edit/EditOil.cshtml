@@ -22,6 +22,10 @@
     <script src="/js/Edit/addoil2.js"></script>
 }
 
+@section Title {
+    Редактор масла
+}
+
 <div>
     <form id="oilForm" method="post" asp-controller="Edit" asp-action="EditedAddedOil" enctype="multipart/form-data">
         <div>
@@ -57,7 +61,7 @@
         </div>
 
         <div>
-            <h4>Объём канистры(для указания масла на розлив укажите 0 объём)</h4>
+            <h4>Объём канистры</h4>
             <input type="number" name="Volume" value="@Model.Volume" required/>
         </div>
         <div>

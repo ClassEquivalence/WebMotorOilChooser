@@ -8,7 +8,7 @@
         Компания:
         <input type="text" name="Name" value="@Model.Name" />
         Владелец:
-        <select id="owner @Model.id" name="Owner" asp-for="@Model.OwnerId">
+        <select id="owner @Model.id" name="OwnerId" asp-for="@Model.OwnerId">
             @foreach (var user in Company.Users)
             {
                 if (user.id == Model.OwnerId)
