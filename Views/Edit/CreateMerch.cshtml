@@ -1,6 +1,6 @@
 ﻿@model WebApplication1.Models.Edit.ToRender.ListUnits.Merch;
 
-<form class="merchForm" id="@Model.Merchandise.id">
+<form class="merchForm editUnit paddingUnit" id="@Model.Merchandise.id">
     <input name="merchId" value="@Model.Merchandise.id" hidden />
 
     <h4>Масло(номенклатура) товара</h4>
@@ -43,6 +43,6 @@
     <div>
         <input type="number" name="stockcount" value="@Model.Merchandise.StockCount" class="merchOpts @Model.Merchandise.id">
     </div>
-    <input type="button" name="delete" id="del @Model.Merchandise.id" value="Удалить" />
+    <input class="inpBtn" type="button" name="delete" id="del @Model.Merchandise.id" value="Удалить" />
 </form>
 

@@ -3,7 +3,7 @@
 @using WebApplication1.Controllers;
 
 
-<div id="storeCont @Model.id">
+<div id="storeCont @Model.id" class="paddingUnit">
     <form class="subEditUnit companyStore" id="store @Model.id">
         Адрес магазина:
         <input type="text" name="Adress" value="@Model.Adress" />
@@ -11,5 +11,5 @@
                value="@Model.id" hidden />
     </form>
 
-    <input value="Удалить магазин" class="delStoreBtn" type="button" data-storeid="@Model.id" id="storeDelBtn @Model.id" />
+    <input value="Удалить магазин" class="delStoreBtn inpBtn" type="button" data-storeid="@Model.id" id="storeDelBtn @Model.id" />
 </div>

@@ -5,6 +5,7 @@
 @section Styles {
     <link rel="stylesheet" href="/css/Home/_Layout.css" />
     <link rel="stylesheet" href="/css/Home/Test.css" />
+    <link rel="stylesheet" href="/css/Edit/CommonEditStyle.css" />
 }
 
 @section Scripts{
@@ -20,7 +21,7 @@
     <h3>Список масел на продажу</h3>
     @foreach (var el in Model.MotorOilMerches)
     {
-        <form class="merchForm" id="@el.id">
+        <form class="merchForm editUnit paddingUnit" id="@el.id">
             <input name="merchId" value="@el.id" hidden />
 
             <h4>Масло(номенклатура) товара</h4>
@@ -65,9 +66,11 @@
                 <input type="number" name="stockcount" value="@el.StockCount" class="merchOpts @el.id">
             </div>
 
-            <input type="button" name="delete" id="del @el.id" value="Удалить" />
+            <input class="inpBtn" type="button" name="delete" id="del @el.id" value="Удалить" />
         </form>
     }
 </div>
-<input type="button" id="addEl" value="Добавить"/>
+<div class="paddingUnit">
+    <input type="button" class="inpBtn" id="addEl" value="Добавить" />
+</div>
 

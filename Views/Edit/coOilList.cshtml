@@ -4,21 +4,24 @@
 @section Styles {
     <link rel="stylesheet" href="/css/Home/_Layout.css" />
     <link rel="stylesheet" href="/css/Home/Test.css" />
+    <link rel="stylesheet" href="/css/Edit/CommonEditStyle.css" />
 }
 
 <div>
     <h3>Список</h3>
+    <a href="coAddOil">
+        <input class="inpBtn paddingUnit" type="button" name="add" value="Добавить" />
+    </a>
     @foreach (var el in Model.MotorOils)
     {
+        <div class="editUnit paddingUnit">
         <h4>Масло: </h4><h4>@el</h4>
         <a href="coUpdOil?edit=@el.id">
-            <input type="button" name="add" value="Редактировать" />
+            <input class="inpBtn" type="button" name="add" value="Редактировать" />
         </a>
         <a href="coDelOil?delete=@el.id">
-            <input type="button" name="add" value="Удалить" />
+            <input class="inpBtn" type="button" name="add" value="Удалить" />
         </a>
+        </div>
     }
-    <a href="coAddOil">
-        <input type="button" name="add" value="Добавить" />
-    </a>
 </div>

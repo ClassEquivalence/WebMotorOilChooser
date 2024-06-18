@@ -28,6 +28,15 @@ button {
     cursor: pointer;
 }
 
+.inpBtn {
+    background-color: #f7ce00;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .header_menu{
 	text-align: center;
 	min-width: 80vw;
